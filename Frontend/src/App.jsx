@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home, AboutUs, Menu } from './pages/index'
+import { Home, AboutUs, Menu, ContactUs } from './pages/index'
 
 import { Header, Footer } from './components'
 
@@ -14,6 +14,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/about-us' element={<AboutUs />} />
             <Route path='/menu' element={<Menu />} />
+            <Route path='/contact-us' element={<ContactUs />} />
           </Routes>
         </main>
         <Footer />

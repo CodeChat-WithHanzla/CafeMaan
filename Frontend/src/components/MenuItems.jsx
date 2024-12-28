@@ -1,7 +1,7 @@
 import React from 'react'
 import { MenuCard } from './index'
 
-function MenuItems({ item = 'Deal' }) {
+function MenuItems({ item }) {
     const menuItemsDesc = [
         {
             DealHeading: "Any Two Deal",

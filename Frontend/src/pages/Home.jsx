@@ -3,7 +3,7 @@ import { Carousel, MenuHeader, MenuItems } from '../components';
 
 function Home() {
     return (
-        <div className="bg-[#121212] min-h-screen flex flex-col">
+        <div className="bg-[#121212] min-h-screen flex flex-col w-screen">
             <div className="bg-[#171717] flex-grow">
                 <Carousel />
                 <MenuHeader />
