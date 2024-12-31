@@ -31,8 +31,8 @@ function Header() {
             <div className="flex justify-between items-center px-6 py-4 md:px-8">
                 <img
                     className="w-14 md:w-16 transition-all duration-300 hover:scale-105"
-                    src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735326168/WhatsApp_Image_2024-12-27_at_23.09.20_b99ffbd8_n3nktm.jpg"
-                    alt="Logo"
+                    src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
+                    alt="CafeMaan"
                 />
                 <button
                     className="md:hidden text-3xl focus:outline-none"

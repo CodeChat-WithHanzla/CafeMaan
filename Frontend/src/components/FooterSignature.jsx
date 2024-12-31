@@ -5,8 +5,8 @@ function FooterSignature() {
     return (
         <div className='text-white'>
             <img
-                className="mx-auto mb-4"
-                src="https://rancherscafe.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.9137e136.png&w=128&q=75"
+                className="mx-auto mb-4 w-32 h-32 object-contain"
+                src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
                 alt="Logo"
             />
             <p className='text-2xl font-bold mb-2'>Follow Us</p>
