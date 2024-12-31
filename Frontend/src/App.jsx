@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword } from './pages/index';
 import { Header, Footer } from './components';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function AppContent() {
   const location = useLocation();
@@ -28,9 +30,11 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </Provider >
   );
 }
 

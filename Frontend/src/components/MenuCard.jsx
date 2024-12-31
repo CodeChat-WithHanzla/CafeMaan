@@ -1,7 +1,13 @@
 import React from 'react';
 import { AddToCartButton } from './index';
+import { useDispatch, } from "react-redux"
+import { setSelectedItem } from "../slice/SelectedSlice"
+function MenuCard({ DealHeading, DealText, Price, imageUrl, rating, category }) {
 
-function MenuCard({ DealHeading, DealText, Price, imageUrl = 'https://rancherscafe.com/_next/image?url=https%3A%2F%2Franchers.s3.ap-southeast-1.amazonaws.com%2Fproducts%2Fsku%2Fimages%2FANY-2-DEAL.webp&w=1080&q=75' }) {
+    const dispatch = useDispatch();
+    const handleSelectedItem = () => {
+        dispatch(setSelectedItem({ DealHeading, DealText, Price, imageUrl, rating, category }));
+    }
     return (
         <div className="bg-[#171717] w-72 h-96 rounded-xl shadow-lg p-4 flex flex-col justify-between">
 
@@ -23,7 +29,7 @@ function MenuCard({ DealHeading, DealText, Price, imageUrl = 'https://ranchersca
             </div>
 
 
-            <AddToCartButton />
+            <AddToCartButton handleCLick={handleSelectedItem} />
         </div>
     );
 }

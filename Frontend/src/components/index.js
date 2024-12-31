@@ -10,6 +10,10 @@ import FooterItem from "./FooterItem";
 import Input from "./Input";
 import PasswordInputs from "./PasswordInputs";
 import FormButton from "./FormButton";
+import AddToCart from "./AddToCart";
+import AddOns from "./AddOns";
+import Options from "./Options";
+import DrinkSelector from "./DrinkSelector";
 
 export {
   Header,
@@ -24,4 +28,8 @@ export {
   Input,
   PasswordInputs,
   FormButton,
+  AddToCart,
+  AddOns,
+  Options,
+  DrinkSelector,
 };
