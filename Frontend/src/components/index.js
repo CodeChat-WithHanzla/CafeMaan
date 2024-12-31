@@ -14,6 +14,7 @@ import AddToCart from "./AddToCart";
 import AddOns from "./AddOns";
 import Options from "./Options";
 import DrinkSelector from "./DrinkSelector";
+import AddToCardSlider from "./AddToCardSlider";
 
 export {
   Header,
@@ -32,4 +33,5 @@ export {
   AddOns,
   Options,
   DrinkSelector,
+  AddToCardSlider,
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword } from './pages/index';
+import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword, JazzCashPayment } from './pages/index';
 import { Header, Footer } from './components';
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -21,6 +21,7 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/jazzCash-payment" element={<JazzCashPayment />} />
         </Routes>
       </main>
       {!isLoginOrSignUpPage && <Footer />}
