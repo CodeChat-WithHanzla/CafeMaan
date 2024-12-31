@@ -9,7 +9,14 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        scrollbarYellow: "#fcb116", 
+      },
+      borderRadius: {
+        "scroll-thumb": "8px", 
+      },
+    },
   },
-  plugins: [flowbite.plugin()],
+  plugins: [flowbite.plugin(), require("tailwind-scrollbar")],
 };

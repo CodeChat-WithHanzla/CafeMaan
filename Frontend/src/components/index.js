@@ -7,6 +7,9 @@ import MenuCard from "./MenuCard";
 import AddToCartButton from "./AddToCartButton";
 import FooterSignature from "./FooterSignature";
 import FooterItem from "./FooterItem";
+import Input from "./Input";
+import PasswordInputs from "./PasswordInputs";
+import FormButton from "./FormButton";
 
 export {
   Header,
@@ -18,4 +21,7 @@ export {
   AddToCartButton,
   FooterItem,
   FooterSignature,
+  Input,
+  PasswordInputs,
+  FormButton,
 };
