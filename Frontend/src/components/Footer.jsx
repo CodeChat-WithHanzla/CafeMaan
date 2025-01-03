@@ -14,7 +14,7 @@ function Footer() {
             <div className="text-center">
                 <FooterSignature />
             </div>
-            <div className="p-20">
+            <div className="sm:p-20 p-5">
                 {Items.map((item, index) => (<FooterItem key={index} Heading={item.Heading} items={item.items} />))}
             </div>
             <div className="text-center mt-5 -mb-1">
