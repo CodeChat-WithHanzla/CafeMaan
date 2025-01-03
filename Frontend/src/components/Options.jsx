@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Options({ value }) {
-    const [isSelected, setIsSelected] = useState(false);
+function Options({ value, setSelectedDrink, selectedDrink }) {
+    const isSelected = selectedDrink === value;
 
     const handleToggle = () => {
-        
-        setIsSelected((prev) => !prev);
+        // Toggle between selecting and unselecting the drink
+        if (isSelected) {
+            setSelectedDrink(null); // Unselect the drink if it is selected
+        } else {
+            setSelectedDrink(value); // Set selected drink to the clicked value
+        }
     };
 
     return (
@@ -14,15 +18,10 @@ function Options({ value }) {
                 className="flex items-center gap-2 cursor-pointer"
                 onClick={handleToggle}
             >
-                
-                <input
-                    type="checkbox"
-                    className="hidden"
-                    checked={isSelected}
-                    onChange={handleToggle} 
-                />
                 <div
-                    className={`w-5 h-5 rounded-full border-2 ${isSelected ? "bg-[#FCB116] border-[#FCB116]" : "border-[#FCB116] bg-transparent"
+                    className={`w-5 h-5 rounded-full border-2 ${isSelected
+                        ? "bg-[#FCB116] border-[#FCB116]" 
+                        : "border-[#FCB116] bg-transparent"
                         } transition duration-200`}
                 ></div>
                 <span className="text-white">{value}</span>

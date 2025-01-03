@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel, MenuHeader, MenuItems, AddToCart } from '../components';
 import { useSelector } from 'react-redux';
 
 
 function Home() {
     const selectedItem = useSelector(state => state.selectedItem)
+    const [showCart, setShowCart] = useState(true)
     return (
 
         <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-x-hidden">
@@ -13,12 +14,12 @@ function Home() {
                 <MenuHeader />
             </div>
             <div className="bg-[#121212] flex-grow">
-                <MenuItems item={'Deal'} />
-                <MenuItems item={'Deal'} />
-                <MenuItems item={'Deal'} />
+                <MenuItems item={'Deal'} setShowCart={setShowCart}/>
+                <MenuItems item={'Deal'} setShowCart={setShowCart}/>
+                <MenuItems item={'Deal'} setShowCart={setShowCart}/>
             </div>
 
-            {selectedItem && <AddToCart DealHeading={selectedItem.DealHeading} DealText={selectedItem.DealText} Price={selectedItem.Price} imageUrl={selectedItem.imageUrl} rating={selectedItem.rating} category={selectedItem.category} />}
+            {selectedItem && showCart && <AddToCart setShowCart={setShowCart}  DealHeading={selectedItem.DealHeading} DealText={selectedItem.DealText} Price={selectedItem.Price} imageUrl={selectedItem.imageUrl} rating={selectedItem.rating} category={selectedItem.category} />}
         </div>
 
     );

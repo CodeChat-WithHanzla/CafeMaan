@@ -13,7 +13,7 @@ import FormButton from "./FormButton";
 import AddToCart from "./AddToCart";
 import AddOns from "./AddOns";
 import Options from "./Options";
-import DrinkSelector from "./DrinkSelector";
+import DrinkSelectorSize from "./DrinkSelectorSize";
 import AddToCardSlider from "./AddToCardSlider";
 
 export {
@@ -32,6 +32,6 @@ export {
   AddToCart,
   AddOns,
   Options,
-  DrinkSelector,
+  DrinkSelectorSize,
   AddToCardSlider,
 };

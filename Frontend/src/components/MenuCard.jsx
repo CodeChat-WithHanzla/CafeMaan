@@ -2,11 +2,12 @@ import React from 'react';
 import { AddToCartButton } from './index';
 import { useDispatch, } from "react-redux"
 import { setSelectedItem } from "../slice/SelectedSlice"
-function MenuCard({ DealHeading, DealText, Price, imageUrl, rating, category }) {
+function MenuCard({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category }) {
 
     const dispatch = useDispatch();
     const handleSelectedItem = () => {
         dispatch(setSelectedItem({ DealHeading, DealText, Price, imageUrl, rating, category }));
+        setShowCart(true)
     }
     return (
         <div className="bg-[#171717] w-72 h-96 rounded-xl shadow-lg p-4 flex flex-col justify-between">
@@ -25,7 +26,7 @@ function MenuCard({ DealHeading, DealText, Price, imageUrl, rating, category }) 
 
 
             <div className="mt-4 flex justify-center items-center mb-3">
-                <span className="text-[#FCB116] text-2xl font-bold">{Price}</span>
+                <span className="text-[#FCB116] text-2xl font-bold">Rs. {Price}</span>
             </div>
 
 

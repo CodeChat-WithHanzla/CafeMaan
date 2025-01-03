@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const DrinkSelector = ({ selectedOption, handleChange }) => {
+const DrinkSelectorSize = ({ selectedOption, handleChange }) => {
     const options = [
         { value: 'Regular', label: 'Regular' },
         { value: '1.5L', label: '1.5L' }
@@ -52,4 +52,4 @@ const DrinkSelector = ({ selectedOption, handleChange }) => {
     );
 };
 
-export default DrinkSelector;
+export default DrinkSelectorSize;

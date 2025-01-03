@@ -33,7 +33,7 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                                 <div className="flex flex-col">
                                     <p className="text-sm font-semibold text-white">{item.DealHeading}</p>
                                     <p className="text-xs text-gray-400">{item.DealText}</p>
-                                    <p className="text-sm font-semibold text-yellow-400 mt-1">${item.Price.toFixed(2)}</p>
+                                    <p className="text-sm font-semibold text-yellow-400 mt-1">${item.Price}</p>
                                 </div>
                                 <div className="text-center">
                                     <p className="text-sm text-gray-300">Qty:</p>
