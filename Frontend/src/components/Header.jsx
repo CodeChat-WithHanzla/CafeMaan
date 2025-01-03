@@ -6,16 +6,16 @@ import AddToCardSlider from "../components/AddToCardSlider";
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false); // State for the cart slider
+    const [isCartOpen, setIsCartOpen] = useState(false); 
     const userMenuRef = useRef(null);
-    const isLoggedIn = true;
+    const isLoggedIn = false;
 
     const toggleUserMenu = () => {
         setIsUserMenuOpen((prev) => !prev);
     };
 
     const toggleCartSlider = () => {
-        setIsCartOpen((prev) => !prev); // Toggle cart slider
+        setIsCartOpen((prev) => !prev); 
     };
 
     useEffect(() => {
@@ -40,17 +40,17 @@ function Header() {
                 }`}
         >
             <div className="flex justify-between items-center px-6 py-4 md:px-8">
-                {/* AddToCardSlider */}
+                
                 <AddToCardSlider isOpen={isCartOpen} toggleSlider={toggleCartSlider} />
 
-                {/* Logo */}
+                
                 <img
                     className="w-14 md:w-16 transition-all duration-300 hover:scale-105"
                     src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
                     alt="CafeMaan"
                 />
 
-                {/* Mobile Menu Button */}
+                
                 <button
                     className="md:hidden text-3xl focus:outline-none"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -58,7 +58,7 @@ function Header() {
                     <i className={isMenuOpen ? "ri-close-line" : "ri-menu-line"}></i>
                 </button>
 
-                {/* Navigation Menu */}
+                
                 <nav
                     className={`${isMenuOpen ? "block" : "hidden"
                         } absolute top-20 left-0 w-full bg-[#121212] md:static md:block md:w-auto z-30`}
@@ -88,7 +88,7 @@ function Header() {
                             );
                         })}
 
-                        {/* Mobile Icons */}
+                        
                         <div className="flex justify-center md:hidden gap-4 text-2xl mt-4 relative">
                             <i
                                 onClick={toggleUserMenu}
@@ -121,7 +121,7 @@ function Header() {
                     </ul>
                 </nav>
 
-                {/* Desktop Icons */}
+                
                 <div className="hidden md:flex items-center gap-6 text-xl relative">
                     <i
                         className="ri-user-3-fill hover:text-yellow-400 transition duration-300 cursor-pointer"

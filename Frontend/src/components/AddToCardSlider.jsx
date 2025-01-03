@@ -1,8 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from '../slice/CartSlice';
+import "remixicon/fonts/remixicon.css";
 
 const AddToCardSlider = ({ isOpen, toggleSlider }) => {
-    const items = useSelector(state => state.cart)
+    const dispatch = useDispatch();
+    const items = useSelector(state => state.cart);
+
+    const handleRemoveFromCart = (id) => {
+        dispatch(removeFromCart(id));
+    };
 
     return (
         <div
@@ -10,8 +17,6 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                 } transition-transform duration-500 ease-in-out border-l border-gray-700 z-50`}
         >
             <div className="p-6 flex flex-col h-full">
-
-
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-yellow-400">Your Cart</h2>
                     <button
@@ -21,7 +26,6 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                         ✕
                     </button>
                 </div>
-
 
                 <div className="flex-1 overflow-y-auto">
                     {items.length > 0 ? (
@@ -33,12 +37,18 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                                 <div className="flex flex-col">
                                     <p className="text-sm font-semibold text-white">{item.DealHeading}</p>
                                     <p className="text-xs text-gray-400">{item.DealText}</p>
-                                    <p className="text-sm font-semibold text-yellow-400 mt-1">${item.Price}</p>
+                                    <p className="text-sm font-semibold text-yellow-400 mt-1">Rs. {item.Price}</p>
                                 </div>
                                 <div className="text-center">
                                     <p className="text-sm text-gray-300">Qty:</p>
                                     <p className="text-lg font-bold text-white">{item.quantity}</p>
                                 </div>
+                                <button
+                                    onClick={() => handleRemoveFromCart(item.id)}
+                                    className="text-red-500 hover:text-red-600 transition duration-200"
+                                >
+                                    <i className="ri-delete-bin-6-line text-2xl"></i>
+                                </button>
                             </div>
                         ))
                     ) : (
@@ -46,7 +56,7 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                     )}
                 </div>
 
-                {/* Footer */}
+
                 {items.length > 0 && (
                     <div className="mt-6 border-t border-gray-700 pt-4">
                         <button className="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 shadow-md">
