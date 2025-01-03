@@ -85,10 +85,10 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         <div
             className="bg-[#171717] p-10 text-white w-full space-y-8 relative max-h-[600px] overflow-y-scroll scrollbar-thin scrollbar-thumb-scrollbarYellow scrollbar-track-transparent scrollbar-thumb-rounded-scroll-thumb pr-5"
             style={{
-                position: isVisible ? 'absolute' : 'fixed', // Ensure it's positioned where opened
-                top: position ? position.top : 'auto', // Dynamically set the top position
-                left: position ? position.left : 'auto', // Dynamically set the left position
-                zIndex: isVisible ? 9999 : 1, // Increase z-index when visible
+                position: isVisible ? 'absolute' : 'fixed',
+                top: position ? position.top : 'auto',
+                left: position ? position.left : 'auto',
+                zIndex: isVisible ? 9999 : 1,
             }}
         >
             <button
