@@ -1,16 +1,21 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword, JazzCashPayment } from './pages/index';
-import { Header, Footer } from './components';
-import { Provider } from 'react-redux';
-import store from './store/store';
+import React from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword, ProceedToPay } from "./pages/index";
+import { Header, Footer, ScrollToTop } from "./components";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store/store";
 
 function AppContent() {
   const location = useLocation();
-  const isLoginOrSignUpPage = location.pathname === '/login' || location.pathname === '/sign-up' || location.pathname === '/forget-password';
+  const isLoginOrSignUpPage =
+    location.pathname === "/login" ||
+    location.pathname === "/sign-up" ||
+    location.pathname === "/forget-password";
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       {!isLoginOrSignUpPage && <Header />}
       <main className="flex-1">
         <Routes>
@@ -21,7 +26,7 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/jazzCash-payment" element={<JazzCashPayment />} />
+          <Route path="/pay" element={<ProceedToPay />} />
         </Routes>
       </main>
       {!isLoginOrSignUpPage && <Footer />}
@@ -33,9 +38,11 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <AppContent />
+        <PersistGate loading={null} persistor={persistor}>
+          <AppContent />
+        </PersistGate>
       </BrowserRouter>
-    </Provider >
+    </Provider>
   );
 }
 

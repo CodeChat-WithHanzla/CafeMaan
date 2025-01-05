@@ -5,7 +5,7 @@ import ContactUs from "./CantactUs";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import ForgetPassword from "./ForgetPassword";
-import JazzCashPayment from "./JazzCashPayment";
+import ProceedToPay from "./ProceedToPay";
 
 export {
   Home,
@@ -15,5 +15,5 @@ export {
   Login,
   SignUp,
   ForgetPassword,
-  JazzCashPayment,
+  ProceedToPay,
 };

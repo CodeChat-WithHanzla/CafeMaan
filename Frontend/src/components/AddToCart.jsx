@@ -4,6 +4,7 @@ import { addToCart } from '../slice/CartSlice';
 import { Rating } from 'flowbite-react';
 import { AddToCartButton, AddOns, Options, DrinkSelectorSize } from './index';
 import { nanoid } from 'nanoid';
+import { useNavigate } from 'react-router-dom';
 
 function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, position }) {
     const basePrice = Price;
@@ -15,7 +16,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
     const [selectedAddOns, setSelectedAddOns] = useState([]);
     const [selectedDrink, setSelectedDrink] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
-
+    const navigate = useNavigate()
     useEffect(() => {
         setPrice(Price);
         if (position) {
@@ -78,6 +79,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         console.log(newFormData);
 
         dispatch(addToCart(newFormData));
+        
     };
 
 

@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import "remixicon/fonts/remixicon.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AddToCardSlider from "../components/AddToCardSlider";
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false); 
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const userMenuRef = useRef(null);
     const isLoggedIn = false;
+
+    const location = useLocation();
 
     const toggleUserMenu = () => {
         setIsUserMenuOpen((prev) => !prev);
     };
 
     const toggleCartSlider = () => {
-        setIsCartOpen((prev) => !prev); 
+        setIsCartOpen((prev) => !prev);
     };
 
     useEffect(() => {
@@ -40,17 +42,12 @@ function Header() {
                 }`}
         >
             <div className="flex justify-between items-center px-6 py-4 md:px-8">
-                
                 <AddToCardSlider isOpen={isCartOpen} toggleSlider={toggleCartSlider} />
-
-                
                 <img
                     className="w-14 md:w-16 transition-all duration-300 hover:scale-105"
                     src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
                     alt="CafeMaan"
                 />
-
-                
                 <button
                     className="md:hidden text-3xl focus:outline-none"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -58,7 +55,6 @@ function Header() {
                     <i className={isMenuOpen ? "ri-close-line" : "ri-menu-line"}></i>
                 </button>
 
-                
                 <nav
                     className={`${isMenuOpen ? "block" : "hidden"
                         } absolute top-20 left-0 w-full bg-[#121212] md:static md:block md:w-auto z-30`}
@@ -76,19 +72,23 @@ function Header() {
                                                 ? "/about-us"
                                                 : "";
 
+                            
+                            const isActive = location.pathname === path;
+
                             return (
                                 <li key={index} className="relative group">
                                     <Link to={path}>
-                                        <div className="cursor-pointer text-lg md:text-base hover:text-yellow-400 transition duration-300 md:mb-2">
+                                        <div
+                                            className={`cursor-pointer text-lg md:text-xl font-bold ${isActive ? "text-yellow-400" : "hover:text-yellow-400"} transition duration-300 md:mb-2`}
+                                        >
                                             {item}
                                         </div>
                                     </Link>
-                                    <div className="h-1 bg-yellow-500 w-full absolute bottom-0 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                                    <div className={`h-1 bg-yellow-500 w-full absolute bottom-0 scale-x-0 group-hover:scale-x-100 ${isActive ? "scale-x-100" : ""} transition-transform origin-left duration-300`}></div>
                                 </li>
                             );
                         })}
 
-                        
                         <div className="flex justify-center md:hidden gap-4 text-2xl mt-4 relative">
                             <i
                                 onClick={toggleUserMenu}
@@ -121,15 +121,14 @@ function Header() {
                     </ul>
                 </nav>
 
-                
                 <div className="hidden md:flex items-center gap-6 text-xl relative">
                     <i
-                        className="ri-user-3-fill hover:text-yellow-400 transition duration-300 cursor-pointer"
+                        className="ri-user-3-fill hover:text-yellow-400 transition duration-300 cursor-pointer font-bold"
                         onClick={toggleUserMenu}
                     ></i>
                     <i
                         onClick={toggleCartSlider}
-                        className="ri-shopping-cart-2-fill hover:text-yellow-400 transition duration-300"
+                        className="ri-shopping-cart-2-fill hover:text-yellow-400 transition duration-300 font-bold"
                     ></i>
 
                     {isUserMenuOpen && (

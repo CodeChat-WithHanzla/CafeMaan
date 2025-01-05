@@ -15,6 +15,10 @@ import AddOns from "./AddOns";
 import Options from "./Options";
 import DrinkSelectorSize from "./DrinkSelectorSize";
 import AddToCardSlider from "./AddToCardSlider";
+import ExploreMenu from "./ExploreMenu";
+import MapEmbed from "./MapEmbed";
+import JazzCashPayment from "./JazzCashPayment";
+import ScrollToTop from "./ScrollToTop";
 
 export {
   Header,
@@ -34,4 +38,8 @@ export {
   Options,
   DrinkSelectorSize,
   AddToCardSlider,
+  ExploreMenu,
+  MapEmbed,
+  JazzCashPayment,
+  ScrollToTop,
 };

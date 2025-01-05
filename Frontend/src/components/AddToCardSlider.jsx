@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from '../slice/CartSlice';
 import "remixicon/fonts/remixicon.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AddToCardSlider = ({ isOpen, toggleSlider }) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     const items = useSelector(state => state.cart);
+
+    const sliderRef = useRef(null);
 
     const handleRemoveFromCart = (id) => {
         dispatch(removeFromCart(id));
     };
 
+    const isCheckoutPage = location.pathname === '/pay';
+
+    
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sliderRef.current && !sliderRef.current.contains(event.target) && isOpen) {
+                toggleSlider(); 
+            }
+        };
+
+        
+        document.addEventListener("mousedown", handleClickOutside);
+
+        
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [toggleSlider, isOpen]);
+
     return (
         <div
+            ref={sliderRef}
             className={`fixed top-0 right-0 h-full w-80 bg-[#1f1f1f] shadow-xl transform ${isOpen ? "translate-x-0" : "translate-x-full"
                 } transition-transform duration-500 ease-in-out border-l border-gray-700 z-50`}
         >
@@ -56,10 +81,12 @@ const AddToCardSlider = ({ isOpen, toggleSlider }) => {
                     )}
                 </div>
 
-
-                {items.length > 0 && (
+                {items.length > 0 && !isCheckoutPage && (
                     <div className="mt-6 border-t border-gray-700 pt-4">
-                        <button className="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 shadow-md">
+                        <button onClick={() => {
+                            toggleSlider();
+                            navigate('/pay');
+                        }} className="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 shadow-md">
                             Proceed to Checkout
                         </button>
                     </div>

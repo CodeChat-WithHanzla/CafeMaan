@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel, MenuHeader, MenuItems, AddToCart } from '../components';
+import { Carousel, MenuHeader, MenuItems, AddToCart, ExploreMenu } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
 
@@ -19,8 +19,10 @@ function Home() {
             <div className="bg-[#171717] flex-grow">
                 <Carousel />
                 <MenuHeader />
+
             </div>
             <div className="bg-[#121212] flex-grow">
+                <ExploreMenu />
                 <MenuItems item={'Deal'} setShowCart={setShowCart} />
                 <MenuItems item={'Deal'} setShowCart={setShowCart} />
                 <MenuItems item={'Deal'} setShowCart={setShowCart} />

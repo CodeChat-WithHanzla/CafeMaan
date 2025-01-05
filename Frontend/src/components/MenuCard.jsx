@@ -10,7 +10,7 @@ function MenuCard({ setShowCart, DealHeading, DealText, Price, imageUrl, rating,
         setShowCart(true)
     }
     return (
-        <div className="bg-[#171717] w-72 h-96 rounded-xl shadow-lg p-4 flex flex-col justify-between">
+        <div className="bg-[#171717] w-72 h-96 rounded-xl shadow-lg p-4 flex flex-col justify-between transition-transform duration-300 transform hover:scale-110">
 
             <img
                 src={imageUrl}
