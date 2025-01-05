@@ -9,7 +9,7 @@ function Footer() {
     const Items = [
         { Heading: "Menu", items: ["Deals", "Chicken Burger", "Beef Burger", "Pizza", "Fries", "Cheeseburger", "Veggie Burger", "Pasta", "Salads", "Shakes", "Desserts"] },
         { Heading: "Location", items: ["Qasur"] },
-        { Heading: "CafeMaan", items: ["About Us"] },
+        { Heading: "CafeMaan", items: ["About"] },
     ];
 
     const handleLocationClick = (item) => {
@@ -26,13 +26,17 @@ function Footer() {
     };
 
     const handleMenuClick = (item) => {
-        navigate('/menu');
-        setTimeout(() => {
-            const section = document.getElementById(item);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 500);
+        if (item === "About" || item === "CafeMaan") {
+            navigate('/about-us');
+        } else {
+            navigate('/menu');
+            setTimeout(() => {
+                const section = document.getElementById(item);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 500);
+        }
     };
 
     return (
@@ -42,7 +46,6 @@ function Footer() {
             </div>
             <div className="sm:p-20 p-5 flex justify-around gap-20 items-center">
                 <div className='flex justify-around items-start w-screen'>
-                    {/* Map over the Items array, which is now uniform */}
                     {Items.map((item, index) => (
                         <FooterItem
                             key={index}
@@ -52,11 +55,7 @@ function Footer() {
                                     key={idx}
                                     className="cursor-pointer hover:text-yellow-300 transition"
                                     onClick={() => {
-                                        if (item.Heading === "Menu") {
-                                            handleMenuClick(subItem);
-                                        } else {
-                                            handleLocationClick(subItem);
-                                        }
+                                        handleMenuClick(subItem);
                                     }}
                                 >
                                     {subItem}
