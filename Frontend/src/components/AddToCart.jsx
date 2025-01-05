@@ -79,7 +79,8 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         console.log(newFormData);
 
         dispatch(addToCart(newFormData));
-        
+        navigate('/pay')
+
     };
 
 

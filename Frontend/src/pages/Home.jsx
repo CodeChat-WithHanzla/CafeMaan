@@ -4,9 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
 
 function Home() {
-    const selectedItem = useSelector(state => state.selectedItem);
+    const selectedItem = useSelector((state) => state.selectedItem);
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(true);
+
+    const menuBar = [
+        "Deals",
+        "Chicken Burger",
+        "Beef Burger",
+        "Pizza",
+        "Fries",
+        "Cheeseburger",
+        "Veggie Burger",
+        "Pasta",
+        "Salads",
+        "Shakes",
+        "Desserts"
+    ];
 
     useEffect(() => {
         if (!showCart) {
@@ -15,17 +29,18 @@ function Home() {
     }, [showCart, dispatch]);
 
     return (
-        <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-x-hidden">
+        <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-hidden">
             <div className="bg-[#171717] flex-grow">
                 <Carousel />
-                <MenuHeader />
-
+                <MenuHeader menuBar={menuBar} />
             </div>
             <div className="bg-[#121212] flex-grow">
                 <ExploreMenu />
-                <MenuItems item={'Deal'} setShowCart={setShowCart} />
-                <MenuItems item={'Deal'} setShowCart={setShowCart} />
-                <MenuItems item={'Deal'} setShowCart={setShowCart} />
+                {menuBar.map((item, index) => (
+                    <div key={index} id={item.replace(/\s/g, "")} className="min-h-[80vh] p-6">
+                        <MenuItems item={item} setShowCart={setShowCart} />
+                    </div>
+                ))}
             </div>
 
             {selectedItem && showCart && (

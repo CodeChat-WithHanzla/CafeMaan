@@ -38,7 +38,7 @@ function Header() {
 
     return (
         <header
-            className={`bg-[#121212] text-white w-screen shadow-md relative z-20 ${isMenuOpen ? "h-96" : ""
+            className={`bg-[#121212] text-white w-screen shadow-md sticky z-50 top-0 ${isMenuOpen ? "h-96" : ""
                 }`}
         >
             <div className="flex justify-between items-center px-6 py-4 md:px-8">

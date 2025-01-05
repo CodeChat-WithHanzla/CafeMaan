@@ -32,7 +32,7 @@ const ProceedToPay = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#121212] to-[#1a1a1a] w-full">
-            <div className="p-8 bg-[#1f1f1f] rounded-2xl shadow-2xl max-w-lg w-full">
+            <div className="p-8 bg-[#1f1f1f] rounded-2xl shadow-2xl max-w-lg w-full my-10">
                 {!selectedItem ? (
                     <>
                         <h1 className="text-3xl font-bold mb-6 text-center text-yellow-400">Proceed to Checkout</h1>

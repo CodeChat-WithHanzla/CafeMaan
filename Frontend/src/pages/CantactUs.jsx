@@ -12,8 +12,8 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#121212] flex items-center justify-center p-5">
-            <div className="bg-[#1f1f1f] p-10 rounded-lg shadow-lg w-full max-w-lg">
+        <div className="min-h-screen bg-[#121212] flex items-center justify-center overflow-hidden w-screen">
+            <div className="bg-[#1f1f1f] p-10 rounded-lg shadow-lg w-full max-w-lg ">
                 <h2 className="text-2xl font-bold mb-5 text-[#FCB116]">Contact Us</h2>
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
