@@ -2,12 +2,13 @@ import React from "react";
 
 function MapEmbed() {
     return (
-        <div className="relative text-right w-[50%] h-[400px]">
-            <div className="overflow-hidden bg-none w-full h-[400px]">
+        <div className="relative text-right w-full max-w-[700px] mx-auto">
+            <div className="overflow-hidden bg-none w-full aspect-video">
                 <iframe
-                    className="w-full h-[400px]"
-                    src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=maan village district kasur&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                    className="w-full h-full"
+                    src="https://maps.google.com/maps?q=31.07778,74.49075&z=14&output=embed"
                     title="Google Map"
+                    allowFullScreen
                 ></iframe>
             </div>
         </div>

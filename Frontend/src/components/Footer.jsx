@@ -7,7 +7,10 @@ function Footer() {
 
     const Items = [
         { Heading: "Menu", items: ["Deals", "Chicken Burger", "Beef Burger", "Pizza", "Fries", "Cheeseburger", "Veggie Burger", "Pasta", "Salads", "Shakes", "Desserts"] },
-        { Heading: "Location", items: ["Qasur"] },
+        {
+            Heading: "Location",
+            items: ["Maan Kasur, Punjab, Pakistan"]
+        },
         { Heading: "CafeMaan", items: ["About"] },
     ];
 
@@ -27,14 +30,13 @@ function Footer() {
         }
     };
 
-
     return (
-        <div className="bg-[#121212] p-6 w-screen mt-auto text-white">
+        <div className="bg-[#121212] p-6 w-full mt-auto text-white">
             <div className="text-center">
                 <FooterSignature />
             </div>
-            <div className="sm:p-20 p-5 flex justify-around gap-20 items-center">
-                <div className='flex justify-around items-start w-screen'>
+            <div className="sm:p-20 p-5 flex flex-wrap justify-between items-center">
+                <div className="flex justify-around items-start w-full sm:w-auto sm:flex-row flex-col">
                     {Items.map((item, index) => (
                         <FooterItem
                             key={index}
@@ -53,7 +55,7 @@ function Footer() {
                         />
                     ))}
                 </div>
-                <div className="flex justify-center items-center w-full">
+                <div className="w-full sm:w-[50%] h-[400px] sm:h-[400px] mt-5 sm:mt-0">
                     <MapEmbed />
                 </div>
             </div>
