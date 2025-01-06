@@ -6,6 +6,13 @@ import { AddToCartButton, AddOns, Options, DrinkSelectorSize } from './index';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 
+const drinkPrices = {
+    'Pepsi': { 'Regular': 50, '1.5L': 100 },
+    'Coca Cola': { 'Regular': 55, '1.5L': 110 },
+    'Mirinda': { 'Regular': 45, '1.5L': 90 },
+    '7up': { 'Regular': 50, '1.5L': 100 }
+};
+
 function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, position }) {
     const basePrice = Price;
     const id = nanoid();
@@ -16,17 +23,33 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
     const [selectedAddOns, setSelectedAddOns] = useState([]);
     const [selectedDrink, setSelectedDrink] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     useEffect(() => {
         setPrice(Price);
         if (position) {
             setIsVisible(true);
         }
     }, [Price, position]);
+    useEffect(() => {
+        if (!selectedDrink) {
+            setPrice((prevPrice) => {
+                const addOnsTotal = selectedAddOns.reduce((total, addOn) => total + addOn.price, 0);
+                return basePrice * quantity + addOnsTotal;
+            });
+        } else {
+            updatePrice(selectedDrink, selectedOption);
+        }
+    }, [selectedDrink]);
+
 
     const handleChange = (selected) => {
         setSelectedOption(selected);
+        if (selectedDrink) {
+            updatePrice(selectedDrink, selected);
+        }
     };
+
 
     const handleQuantityChange = (action) => {
         setQuantity((prevQuantity) => {
@@ -41,7 +64,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
             }
 
             const addOnsTotal = selectedAddOns.reduce((total, addOn) => total + addOn.price, 0);
-            setPrice(basePrice * newQuantity + addOnsTotal);
+            setPrice(basePrice * newQuantity + addOnsTotal + getDrinkPrice(selectedDrink, selectedOption));
 
             return newQuantity;
         });
@@ -56,10 +79,23 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
                 newAddOns = [...prevAddOns, addon];
             }
             const addOnsTotal = newAddOns.reduce((total, addOn) => total + addOn.price, 0);
-            setPrice(basePrice * quantity + addOnsTotal);
+            setPrice(basePrice * quantity + addOnsTotal + getDrinkPrice(selectedDrink, selectedOption));
 
             return newAddOns;
         });
+    };
+
+    const updatePrice = (drink, size) => {
+        const drinkPrice = getDrinkPrice(drink, size);
+        const addOnsTotal = selectedAddOns.reduce((total, addOn) => total + addOn.price, 0);
+        setPrice(basePrice * quantity + addOnsTotal + drinkPrice);
+    };
+
+    const getDrinkPrice = (drink, size) => {
+        if (drink && size && drinkPrices[drink]) {
+            return drinkPrices[drink][size.value] || 0;
+        }
+        return 0;
     };
 
     const submitHandler = () => {
@@ -76,13 +112,10 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         if (quantity) newFormData.quantity = quantity;
         if (selectedAddOns.length > 0) newFormData.selectedAddOns = selectedAddOns;
 
-        
-        setShowCart(false)
+        setShowCart(false);
         dispatch(addToCart(newFormData));
-        navigate('/pay')
-
+        navigate('/pay');
     };
-
 
     return (
         <div
