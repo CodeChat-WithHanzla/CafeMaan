@@ -14,38 +14,22 @@ function FooterSignature() {
             <div className="flex flex-col items-center">
                 <p className='text-2xl font-bold mb-2'>Follow Us</p>
                 <div className="flex justify-center gap-4 my-3">
-                    <h5>
-                        <a
-                            href="https://facebook.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-110"
-                        >
-                            <i className="ri-facebook-fill text-3xl"></i>
-                        </a>
-                    </h5>
+                    
+                    <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                        <i className="ri-facebook-fill text-3xl text-white cursor-pointer"></i>
+                    </div>
 
-                    <h5>
-                        <a
-                            href="https://instagram.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 text-white hover:scale-110 transition-all duration-300"
-                        >
-                            <i className="ri-instagram-line text-3xl"></i>
-                        </a>
-                    </h5>
-                    <h5>
-                        <a
-                            href="https://tiktok.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 rounded-full bg-black text-white hover:bg-gray-900 transition-all duration-300 transform hover:scale-110"
-                        >
-                            <i className="ri-tiktok-line text-3xl"></i>
-                        </a>
-                    </h5>
+                    
+                    <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                        <i className="ri-instagram-line text-3xl text-white cursor-pointer"></i>
+                    </div>
+
+                    
+                    <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                        <i className="ri-tiktok-line text-3xl text-white cursor-pointer"></i>
+                    </div>
                 </div>
+
             </div>
 
             <div className="flex gap-4 mt-4">

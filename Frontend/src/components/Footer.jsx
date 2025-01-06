@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FooterSignature, FooterItem, MapEmbed } from './index';
 import { useNavigate } from 'react-router-dom';
 
 function Footer() {
-    const [showMap, setShowMap] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
     const Items = [
         { Heading: "Menu", items: ["Deals", "Chicken Burger", "Beef Burger", "Pizza", "Fries", "Cheeseburger", "Veggie Burger", "Pasta", "Salads", "Shakes", "Desserts"] },
         { Heading: "Location", items: ["Qasur"] },
         { Heading: "CafeMaan", items: ["About"] },
     ];
 
-    const handleLocationClick = (item) => {
-        if (item === "Qasur") {
-            setIsLoading(true);
-            setTimeout(() => {
-                setShowMap(true);
-                setIsLoading(false);
-            }, 2000);
-        } else {
-            setShowMap(false);
-            setIsLoading(false);
-        }
-    };
-
-    const handleMenuClick = (item) => {
-        if (item === "About" || item === "CafeMaan") {
+    const handleMenuClick = (item, heading) => {
+        if (heading === "CafeMaan" && item === "About") {
             navigate('/about-us');
+        } else if (heading === "Location") {
+            console.log(`Navigate to location: ${item}`);
         } else {
             navigate('/menu');
             setTimeout(() => {
@@ -38,6 +26,7 @@ function Footer() {
             }, 500);
         }
     };
+
 
     return (
         <div className="bg-[#121212] p-6 w-screen mt-auto text-white">
@@ -55,7 +44,7 @@ function Footer() {
                                     key={idx}
                                     className="cursor-pointer hover:text-yellow-300 transition"
                                     onClick={() => {
-                                        handleMenuClick(subItem);
+                                        handleMenuClick(subItem, item.Heading);
                                     }}
                                 >
                                     {subItem}
@@ -65,14 +54,7 @@ function Footer() {
                     ))}
                 </div>
                 <div className="flex justify-center items-center w-full">
-                    {isLoading ? (
-                        <div className="flex flex-col items-center">
-                            <div className="animate-spin h-10 w-10 border-4 border-yellow-300 border-t-transparent rounded-full"></div>
-                            <p className="mt-2 text-yellow-300">Loading map...</p>
-                        </div>
-                    ) : showMap ? (
-                        <MapEmbed />
-                    ) : null}
+                    <MapEmbed />
                 </div>
             </div>
             <div className="text-center mt-5 -mb-1">
