@@ -27,42 +27,49 @@ const ProceedToPay = () => {
         setSelectedItem(item);
     };
 
-
     const totalPrice = cartItems.reduce((total, item) => total + item.Price * item.quantity, 0);
 
+    const handleClosePayment = () => {
+        setShowPayment(false);
+        setSelectedItem(null); 
+    };
+
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#121212] to-[#1a1a1a] w-full">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#121212] to-[#1a1a1a] w-screen">
             <div className="p-8 bg-[#1f1f1f] rounded-2xl shadow-2xl max-w-lg w-full my-10">
                 {!selectedItem ? (
                     <>
                         <h1 className="text-3xl font-bold mb-6 text-center text-yellow-400">Proceed to Checkout</h1>
-                        <ul className="space-y-4 mb-6">
-                            {cartItems.map(item => (
-                                <li
-                                    key={item.id}
-                                    className="flex justify-between items-center text-white bg-[#2c2c2c] rounded-lg px-4 py-3 hover:bg-[#444] transition-all cursor-pointer"
-                                    onClick={() => handleItemClick(item)}
-                                >
-                                    <div>
-                                        <h4>{item.DealHeading} - Rs. {item.Price}</h4>
-                                        <p>{item.DealText}</p>
-                                        <p>Quantity: {item.quantity}</p>
-                                    </div>
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();  // Prevent item click event from triggering
-                                            handleRemoveItem(item.id);
-                                        }}
-                                        className="text-red-500 hover:text-red-400 transition-all"
+
+                        {cartItems.length === 0 ? (
+                            <p className="text-center w-full text-yellow-400 text-2xl font-semibold">No items in the <i className="text-3xl ri-shopping-cart-2-fill"></i></p>
+                        ) : (
+                            <ul className="space-y-4 mb-6">
+                                {cartItems.map(item => (
+                                    <li
+                                        key={item.id}
+                                        className="flex justify-between items-center text-white bg-[#2c2c2c] rounded-lg px-4 py-3 hover:bg-[#444] transition-all cursor-pointer"
+                                        onClick={() => handleItemClick(item)}
                                     >
-                                        Remove
-                                    </button>
-                                </li>
+                                        <div>
+                                            <h4>{item.DealHeading} - Rs. {item.Price}</h4>
+                                            <p>{item.DealText}</p>
+                                            <p>Quantity: {item.quantity}</p>
+                                        </div>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleRemoveItem(item.id);
+                                            }}
+                                            className="text-red-500 hover:text-red-400 transition-all"
+                                        >
+                                            Remove
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
 
-                            ))}
-                        </ul>
-
-                        {/* Clear Cart Button */}
                         {cartItems.length > 0 && (
                             <button
                                 onClick={handleClearCart}
@@ -72,13 +79,9 @@ const ProceedToPay = () => {
                             </button>
                         )}
 
-                        {/* Pay All Button */}
                         {cartItems.length > 0 && !showPayment && (
                             <button
-                                onClick={() => {
-                                    setShowPayment(true);
-                                    setSelectedItem(null); // Ensure no item is selected when paying all
-                                }}
+                                onClick={handlePayClick}
                                 className="w-full bg-yellow-500 text-black py-3 rounded-lg hover:bg-yellow-400 transition-all"
                             >
                                 Pay All
@@ -95,7 +98,6 @@ const ProceedToPay = () => {
                             <p>Quantity: {selectedItem.quantity}</p>
                             <p>Selected Drink: {selectedItem.selectedDrink} ({selectedItem.selectedDrinkSize})</p>
 
-                            {/* Safely display Add-ons */}
                             {Array.isArray(selectedItem.selectedAddOns) && selectedItem.selectedAddOns.length > 0 && (
                                 <div>
                                     <h4 className="mt-2">Add-ons:</h4>
@@ -107,7 +109,6 @@ const ProceedToPay = () => {
                                 </div>
                             )}
 
-                            {/* Image of the item */}
                             <div className="mt-4">
                                 <img
                                     src={selectedItem.imageUrl}
@@ -124,7 +125,6 @@ const ProceedToPay = () => {
                             Back to Cart
                         </button>
 
-                        {/* Proceed to Payment Button or Payment Component */}
                         {!showPayment ? (
                             <button
                                 onClick={handlePayClick}
@@ -135,26 +135,25 @@ const ProceedToPay = () => {
                         ) : (
                             <div className="text-white mt-4 text-center">
                                 <h2 className="text-2xl font-semibold mb-2">Jazz Cash Payment</h2>
-                                {/* Pass the selected item's price, payment method, and item to the JazzCashPayment component */}
                                 <JazzCashPayment
                                     paymentAmount={selectedItem.Price}
                                     paymentMethod="JazzCash"
                                     item={selectedItem}
+                                    cartItems={cartItems}
+                                    handleClose={handleClosePayment}
                                 />
                             </div>
                         )}
                     </>
                 )}
 
-                {/* Payment for All Items */}
                 {showPayment && !selectedItem && (
                     <div className="text-white mt-4 text-center">
-                        <h2 className="text-2xl font-semibold mb-2">Jazz Cash Payment</h2>
-                        {/* Pass the total price of all items, payment method, and all items to the JazzCashPayment component */}
                         <JazzCashPayment
                             paymentAmount={totalPrice}
                             paymentMethod="JazzCash"
                             item={cartItems}
+                            handleClose={handleClosePayment}
                         />
                     </div>
                 )}

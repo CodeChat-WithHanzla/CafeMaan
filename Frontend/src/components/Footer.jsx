@@ -31,7 +31,7 @@ function Footer() {
     };
 
     return (
-        <div className="bg-[#121212] p-6 w-full mt-auto text-white">
+        <div className="bg-[#121212] p-6 w-screen mt-auto text-white">
             <div className="text-center">
                 <FooterSignature />
             </div>

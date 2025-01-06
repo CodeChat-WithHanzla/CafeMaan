@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { addMore, addItem } from "../slice/PaidCartSlice";
 import axios from "axios";
 
-const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems }) => {
+const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems, handleClose }) => {
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const handlePayment = async () => {
         try {
@@ -28,16 +28,13 @@ const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems }) => {
         } catch (error) {
             console.error("Error processing payment:", error);
         }
+
+        
+        handleClose();
     };
 
     return (
         <>
-            <button
-                onClick={() => setIsOpen(true)}
-                className="w-full bg-yellow-400 text-[#171717] py-3 rounded font-semibold hover:bg-yellow-500 transition duration-300"
-            >
-                Open JazzCash Payment
-            </button>
             {isOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-[#121212] w-full max-w-lg rounded-lg shadow-lg p-6 text-white transform transition-all scale-110">
@@ -63,7 +60,10 @@ const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems }) => {
                             </a>.
                         </p>
                         <button
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => {
+                                setIsOpen(false);
+                                handleClose();
+                            }}
                             className="absolute top-2 right-2 text-yellow-400 text-xl"
                         >
                             ×

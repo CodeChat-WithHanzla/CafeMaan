@@ -76,8 +76,8 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         if (quantity) newFormData.quantity = quantity;
         if (selectedAddOns.length > 0) newFormData.selectedAddOns = selectedAddOns;
 
-        console.log(newFormData);
-
+        
+        setShowCart(false)
         dispatch(addToCart(newFormData));
         navigate('/pay')
 
