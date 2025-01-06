@@ -72,14 +72,14 @@ function Header() {
                                                 ? "/about-us"
                                                 : "";
 
-                            
+
                             const isActive = location.pathname === path;
 
                             return (
                                 <li key={index} className="relative group">
-                                    <Link to={path}>
+                                    <Link to={path} onClick={() => setIsMenuOpen(false)}>
                                         <div
-                                            className={`cursor-pointer text-lg md:text-xl font-bold ${isActive ? "text-yellow-400" : "hover:text-yellow-400"} transition duration-300 md:mb-2`}
+                                            className={`cursor-pointer text-lg md:text-xl font-bold ${isActive ? "text-yellow-400" : "hover:text-yellow-400"} transition duration-300 mb-1`}
                                         >
                                             {item}
                                         </div>
