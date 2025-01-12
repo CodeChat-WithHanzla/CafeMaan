@@ -1,17 +1,42 @@
 import React, { useState } from 'react';
 import { Input, PasswordInputs, FormButton } from '../components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Modal } from 'flowbite-react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUserData, setIsLoggedIn } from '../slice/UserSlice';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const handleSubmit = (e) => {
+    const [error, setError] = useState('')
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password);
+        if (!email || !password) {
+            setError('Email and Password are required');
+            setShowModal(true);
+            return;
+        }
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
+                email,
+                password,
+            });
+            const { user } = response.data;
+            dispatch(setUserData(user));
+            dispatch(setIsLoggedIn(true));
 
-        setEmail('')
-        setPassword('')
+            setEmail('');
+            setPassword('');
+            navigate('/');
+        } catch (error) {
+            setError(`There was an error while Login!`);
+            setShowModal(true);
+        }
+
     };
 
     return (
@@ -35,9 +60,15 @@ const Login = () => {
                         <FormButton text='SIGN IN' />
 
                         <p className="lg:text-[16px] text-[16px] text-center text-[rgb(255,247,232)] font-semibold leading-normal mt-8 sm:mt-6 md:font-bold">
-                            Don’t have an account? <Link to='/sign-up'><span className="text-[#FCB116] cursor-pointer">Sign Up</span></Link>
+                            Don’t have an account? <Link to='/sign-up'><span className="text-[#FCB116] cursor-pointer" onClick={() => { navigate('/sign-up') }}>Sign Up</span></Link>
                         </p>
                     </form>
+                    <Modal show={showModal} onClose={() => setShowModal(false)}>
+                        <Modal.Header>Error</Modal.Header>
+                        <Modal.Body>
+                            <p>{error}</p>
+                        </Modal.Body>
+                    </Modal>
                 </div>
             </div>
 

@@ -1,18 +1,59 @@
 import React, { useState } from 'react';
 import { Input, PasswordInputs, FormButton } from '../components';
+import { useNavigate } from 'react-router-dom';
+import { Modal } from 'flowbite-react';
+
 const SignUp = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-
-
-    const handleSubmit = (e) => {
+    const [error, setError] = useState('')
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate()
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!name || !email || !phoneNumber || !password || !confirmPassword) {
+            setError('All fields are required');
+            setShowModal(true);
+            return;
+        }
 
-        console.log(name, email, phoneNumber, password, confirmPassword);
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            setShowModal(true);
+            return;
+        }
+        const phoneRegex = /^03\d{9}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            setError('Phone number must start with 03 and be followed by 9 digits.');
+            setShowModal(true);
+            return;
+        }
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/register`, {
+                name,
+                email,
+                phoneNumber,
+                password,
+                confirmPassword,
+            });
+            const { user } = response.data;
+            dispatch(setUserData(user));
+            dispatch(setIsLoggedIn(true));
 
+            setName('');
+            setEmail('');
+            setPhoneNumber('');
+            setPassword('');
+            setConfirmPassword('');
+            navigate('/');
+
+        } catch (error) {
+            setError(`There was an error registering!`);
+            setShowModal(true);
+        }
         setName('')
         setEmail('')
         setPhoneNumber('')
@@ -30,17 +71,23 @@ const SignUp = () => {
                         <h3 className="font-bold text-3xl sm:text-2xl md:text-3xl">SIGNUP to <span className="text-[#FCB116]">CafeMaan</span></h3>
                         <p className="text-[#FCB116] text-[20px] sm:text-[18px] font-serif">Good Fellas Eat Here!</p>
                     </div>
-                    <form onSubmit={handleSubmit} className="w-full mt-5 flex flex-col items-center justify-center space-y-6 max-h-[500px] overflow-y-scroll scrollbar-thin scrollbar-thumb-scrollbarYellow scrollbar-track-transparent scrollbar-thumb-rounded-scroll-thumb pr-5">
-                        <Input value={name} setValue={setName} label="Enter Name" placeholder="Name" type='text' autoComplete='given-name'/>
-                        <Input value={email} setValue={setEmail} label="Enter Email" placeholder="Email" type='email' autoComplete='email'/>
-                        <Input value={phoneNumber} setValue={setPhoneNumber} label="Enter Phone Number" placeholder="Phone Number" type='tel' autoComplete='tel'/>
+                    <form onSubmit={handleSubmit} className="w-full mt-5 flex flex-col items-center justify-center space-y-6 pr-5">
+                        <Input value={name} setValue={setName} label="Enter Name" placeholder="Name" type='text' autoComplete='given-name' />
+                        <Input value={email} setValue={setEmail} label="Enter Email" placeholder="Email" type='email' autoComplete='email' />
+                        <Input value={phoneNumber} setValue={setPhoneNumber} label="Enter Phone Number (e.g 0321.......)" placeholder="Phone Number" type='tel' autoComplete='tel' />
                         <PasswordInputs label='Enter Password' value={password} setValue={setPassword} autocomplete="new-password" />
                         <PasswordInputs label='Confirm Password' value={confirmPassword} setValue={setConfirmPassword} autoComplete="new-password" />
                         <FormButton text='SIGN UP' />
                         <p className="lg:text-[16px] text-[16px] text-center text-[rgb(255,247,232)] font-semibold leading-normal mt-8 sm:mt-6 md:font-bold">
-                            Already have an account? <span className="text-[#FCB116] cursor-pointer">Sign In</span>
+                            Already have an account? <span className="text-[#FCB116] cursor-pointer" onClick={() => navigate('/login')}>Sign In</span>
                         </p>
                     </form>
+                    <Modal show={showModal} onClose={() => setShowModal(false)}>
+                        <Modal.Header>Error</Modal.Header>
+                        <Modal.Body>
+                            <p>{error}</p>
+                        </Modal.Body>
+                    </Modal>
                 </div>
             </div>
         </div>

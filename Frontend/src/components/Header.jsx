@@ -2,13 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import "remixicon/fonts/remixicon.css";
 import { Link, useLocation } from "react-router-dom";
 import AddToCardSlider from "../components/AddToCardSlider";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../slice/UserSlice";
+import axios from 'axios';
+import { setIsLoggedIn } from '../slice/UserSlice';
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const userMenuRef = useRef(null);
-    const isLoggedIn = false;
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const dispatch = useDispatch();
 
     const location = useLocation();
 
@@ -35,6 +40,18 @@ function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isUserMenuOpen]);
+
+    const handleLogout = async () => {
+        try {
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/logout`);
+            dispatch(setIsLoggedIn(false));
+            navigate('/login');
+        } catch (error) {
+            setError(`There was an error while Login!`);
+            setShowModal(true);
+        }
+        dispatch(logout());
+    };
 
     return (
         <header
@@ -137,7 +154,7 @@ function Header() {
                             ref={userMenuRef}
                         >
                             {isLoggedIn ? (
-                                <button className="text-white hover:text-yellow-400 transition duration-300">
+                                <button onClick={handleLogout} className="text-white hover:text-yellow-400 transition duration-300">
                                     Logout
                                 </button>
                             ) : (

@@ -6,6 +6,7 @@ import cartReducer from "../slice/CartSlice";
 import menuItemsReducer from "../slice/MenuSlice";
 import selectedItemReducer from "../slice/SelectedSlice";
 import paidCartReducer from "../slice/PaidCartSlice";
+import userReducer from "../slice/UserSlice";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   menuItems: menuItemsReducer,
   selectedItem: selectedItemReducer,
   paidCart: paidCartReducer,
+  user: userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
