@@ -50,14 +50,17 @@ const Login = () => {
                         <h3 className="font-bold text-3xl sm:text-2xl md:text-3xl">LOGIN to <span className="text-[#FCB116]">CafeMaan</span></h3>
                         <p className="text-[#FCB116] text-[20px] sm:text-[18px] font-serif">Good Fellas Eat Here!</p>
                     </div>
-                    <form onSubmit={handleSubmit} className="w-full mt-5 flex flex-col items-center justify-center space-y-6">
+                    <form onSubmit={handleSubmit} className="w-full mt-5 flex flex-col items-center justify-center space-y-6 relative">
                         <Input value={email} setValue={setEmail} label="Enter Email" placeholder="Email" type='email' autoComplete='email' />
                         <PasswordInputs label='Enter Password' value={password} setValue={setPassword} autoComplete="current-password" />
-                        <p className="lg:text-[14px] text-[14px] text-[#FCB116] font-normal leading-6 text-right cursor-pointer mb-6 sm:mb-8">
+                        <p className="lg:text-[14px] text-[14px] text-[#FCB116] font-normal leading-6 text-right cursor-pointer mt-7 sm:mb-8 absolute right-2 top-52">
                             Forgot password?
                         </p>
-
-                        <FormButton text='SIGN IN' />
+                         <div className='p-2'>
+                         </div>
+                        <div className='w-full flex justify-center items-center'>
+                            <FormButton text='SIGN IN' />
+                        </div>
 
                         <p className="lg:text-[16px] text-[16px] text-center text-[rgb(255,247,232)] font-semibold leading-normal mt-8 sm:mt-6 md:font-bold">
                             Don’t have an account? <Link to='/sign-up'><span className="text-[#FCB116] cursor-pointer" onClick={() => { navigate('/sign-up') }}>Sign Up</span></Link>

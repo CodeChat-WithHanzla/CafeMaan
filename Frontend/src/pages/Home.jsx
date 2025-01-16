@@ -9,17 +9,13 @@ function Home() {
     const [showCart, setShowCart] = useState(true);
 
     const menuBar = [
-        "Deals",
-        "Chicken Burger",
-        "Beef Burger",
-        "Pizza",
+        "Burgers",
+        "Paratha Roll",
+        "Sandwich",
+        "Crispy Special",
+        "Shawarma",
         "Fries",
-        "Cheeseburger",
-        "Veggie Burger",
         "Pasta",
-        "Salads",
-        "Shakes",
-        "Desserts"
     ];
 
     useEffect(() => {

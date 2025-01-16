@@ -5,6 +5,7 @@ import { Header, Footer, ScrollToTop } from "./components";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store/store";
+import Dashboard from "./pages/Dasboard";
 
 function AppContent() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function AppContent() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/pay" element={<ProceedToPay />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
       {!isLoginOrSignUpPage && <Footer />}

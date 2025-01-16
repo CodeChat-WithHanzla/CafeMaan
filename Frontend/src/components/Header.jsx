@@ -29,11 +29,13 @@ function Header() {
         const handleClickOutside = (event) => {
             if (
                 userMenuRef.current &&
-                !userMenuRef.current.contains(event.target)
+                !userMenuRef.current.contains(event.target) &&
+                !event.target.closest(".ri-user-3-fill")
             ) {
                 setIsUserMenuOpen(false);
             }
         };
+
 
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -121,7 +123,7 @@ function Header() {
                                     ref={userMenuRef}
                                 >
                                     {isLoggedIn ? (
-                                        <button className="text-white hover:text-yellow-400 transition duration-300">
+                                        <button onClick={handleLogout} className="text-white hover:text-yellow-400 transition duration-300">
                                             Logout
                                         </button>
                                     ) : (
@@ -150,7 +152,7 @@ function Header() {
 
                     {isUserMenuOpen && (
                         <div
-                            className="absolute right-0 top-12 bg-[#171717] shadow-lg rounded-md p-4 text-sm font-bold mt-1"
+                            className="absolute right-0 top-12 bg-[#171717] shadow-lg rounded-md p-4 text-sm font-bold mt-1" 
                             ref={userMenuRef}
                         >
                             {isLoggedIn ? (
