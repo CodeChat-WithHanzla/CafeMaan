@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Input, PasswordInputs, FormButton } from '../components';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'flowbite-react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUserData, setIsLoggedIn } from '../slice/UserSlice';
 
 const SignUp = () => {
     const [name, setName] = useState('')
@@ -12,6 +15,8 @@ const SignUp = () => {
     const [error, setError] = useState('')
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name || !email || !phoneNumber || !password || !confirmPassword) {
@@ -51,7 +56,7 @@ const SignUp = () => {
             navigate('/');
 
         } catch (error) {
-            setError(`There was an error registering!`);
+            setError(`There was an error registering! ${error.message}`);
             setShowModal(true);
         }
         setName('')

@@ -6,7 +6,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import ForgetPassword from "./ForgetPassword";
 import ProceedToPay from "./ProceedToPay";
-
+import Adminlogin from "./AdminLogin";
 export {
   Home,
   AboutUs,
@@ -16,4 +16,5 @@ export {
   SignUp,
   ForgetPassword,
   ProceedToPay,
+  Adminlogin,
 };

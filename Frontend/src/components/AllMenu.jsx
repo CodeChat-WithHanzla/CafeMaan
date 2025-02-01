@@ -1,17 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function AllMenu() {
-    const [menuItems, setMenuItems] = useState([
-        {
-            DealHeading: "Any Two Deal",
-            DealText: "Any Two Burgers and any 2 drinks",
-            Price: 1399,
-            imageUrl:
-                "https://rancherscafe.com/_next/image?url=https%3A%2F%2Franchers.s3.ap-southeast-1.amazonaws.com%2Fproducts%2Fsku%2Fimages%2FANY-2-DEAL.webp&w=1080&q=75",
-            rating: 3,
-            category: "Meal",
-        },
-    ]);
+    const [menuItems, setMenuItems] = useState([]);
+    const [loading, setLoading] = useState(true); // To handle loading state
+    const [error, setError] = useState(''); // To handle errors
+
+    useEffect(() => {
+        const fetchMenuItems = async () => {
+            try {
+                // Get token from localStorage
+                const token = localStorage.getItem('token');
+
+                // If token doesn't exist, handle it
+                if (!token) {
+                    setError('No token found');
+                    setLoading(false);
+                    return;
+                }
+
+                // Send GET request to fetch menu items with the Authorization header
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BASE_URL}/admin/menus`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`, // Include token in headers
+                        },
+                    }
+                );
+
+                // Update the state with the fetched menu items
+                setMenuItems(response.data);
+                setLoading(false); // Set loading to false once data is fetched
+            } catch (error) {
+                console.error('Error fetching menu items:', error);
+                setError('Failed to fetch menu items');
+                setLoading(false);
+            }
+        };
+
+        fetchMenuItems();
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
     return (
         <div>
             <h2 className="text-xl font-bold mb-4">All Menu Items</h2>
@@ -31,8 +69,8 @@ function AllMenu() {
                             <td className="border border-gray-600 p-2">{item.DealHeading}</td>
                             <td className="border border-gray-600 p-2">{item.DealText}</td>
                             <td className="border border-gray-600 p-2">{item.Price}</td>
-                            <td className="border border-gray-600 p-2">{item.rating}</td>
-                            <td className="border border-gray-600 p-2">{item.category}</td>
+                            <td className="border border-gray-600 p-2">{item.Rating}</td>
+                            <td className="border border-gray-600 p-2">{item.Category}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -41,4 +79,4 @@ function AllMenu() {
     );
 }
 
-export default AllMenu
+export default AllMenu;

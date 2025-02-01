@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
-
+import adminRouter from "./routes/admin.routes.js";
 const app = express();
 const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 app.use(
@@ -23,4 +23,5 @@ app.get("/", (req, res) => {
   res.send("Hello , How are you ?");
 });
 app.use("/auth", authRouter);
+app.use("/admin", adminRouter);
 export default app;
