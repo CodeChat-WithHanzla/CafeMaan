@@ -2,24 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Carousel, MenuHeader, MenuItems, AddToCart, ExploreMenu } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
-
+import { menuBar } from '../assets/cafemaan';
 function Home() {
     const selectedItem = useSelector((state) => state.selectedItem);
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(true);
-
-    const menuBar = [
-        "Burgers",
-        "Paratha Roll",
-        "Chicken Sandwich",
-        "Pasta",
-        "Crispy Special",
-        "Shawarma",
-        "Fries",
-        "Pizza",
-        "Regular Deal",
-        "Family Deal",
-    ];
     useEffect(() => {
         if (!showCart) {
             dispatch(clearSelectedItem());

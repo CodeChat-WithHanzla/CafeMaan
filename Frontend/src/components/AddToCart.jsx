@@ -144,7 +144,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
                     <p className="text-sm text-gray-400">{DealText}</p>
                     <p className="text-xl font-semibold">Rs. {price}</p>
                     <Rating>
-                        {[...Array(rating)].map((_, index) => (
+                        {[...Array(Math.round(rating))].map((_, index) => (
                             <Rating.Star key={index} filled />
                         ))}
                     </Rating>

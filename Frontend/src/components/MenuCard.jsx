@@ -15,7 +15,7 @@ function MenuCard({ setShowCart, DealHeading, DealText, Price, imageUrl, rating,
             <img
                 src={imageUrl}
                 alt={DealHeading}
-                className="w-full h-48 object-cover rounded-xl mb-4"
+                className="w-full h-48 object-cover rounded-xl mb-4 overflow-hidden"
             />
 
 

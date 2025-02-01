@@ -2,25 +2,11 @@ import { useState, useEffect } from 'react';
 import { MenuItems, AddToCart, ExploreMenu, MenuHeader } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
-
+import { menuBar } from '../assets/cafemaan';
 function Menu() {
     const selectedItem = useSelector((state) => state.selectedItem);
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(true);
-
-    // Define the menu items dynamically
-    const menuBar = [
-        "Burgers",
-        "Paratha Roll",
-        "Chicken Sandwich",
-        "Pasta",
-        "Crispy Special",
-        "Shawarma",
-        "Fries",
-        "Pizza",
-        "Regular Deal",
-        "Family Deal",
-    ];
 
     useEffect(() => {
         if (!showCart) {
