@@ -11,13 +11,15 @@ function Home() {
     const menuBar = [
         "Burgers",
         "Paratha Roll",
-        "Sandwich",
+        "Chicken Sandwich",
+        "Pasta",
         "Crispy Special",
         "Shawarma",
         "Fries",
-        "Pasta",
+        "Pizza",
+        "Regular Deal",
+        "Family Deal",
     ];
-
     useEffect(() => {
         if (!showCart) {
             dispatch(clearSelectedItem());

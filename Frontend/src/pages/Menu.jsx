@@ -10,17 +10,16 @@ function Menu() {
 
     // Define the menu items dynamically
     const menuBar = [
-        "Deals",
-        "Chicken Burger",
-        "Beef Burger",
-        "Pizza",
-        "Fries",
-        "Cheeseburger",
-        "Veggie Burger",
+        "Burgers",
+        "Paratha Roll",
+        "Chicken Sandwich",
         "Pasta",
-        "Salads",
-        "Shakes",
-        "Desserts"
+        "Crispy Special",
+        "Shawarma",
+        "Fries",
+        "Pizza",
+        "Regular Deal",
+        "Family Deal",
     ];
 
     useEffect(() => {
