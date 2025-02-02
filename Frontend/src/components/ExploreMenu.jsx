@@ -1,18 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
+import { exploreMenu } from "../assets/cafemaan/index"
 function ExploreMenu() {
     const navigate = useNavigate()
-    const exploreMenu = [
-        "https://www.kfcpakistan.com/images/12dd14f0-c523-11ee-a0b2-43ac3530dd54-KRUNCH-590X480-2024-02-06190812.png",
-        "https://www.kfcpakistan.com/images/afc4e8b0-ff99-11ed-8640-872ee63b5da0-alacart-2023-05-31095826.png",
-        "https://www.kfcpakistan.com/images/eae296d0-c0fa-11ef-9fcf-0f37e3943d32-590x480withoutBG-2024-12-23065538.png",
-        "https://www.kfcpakistan.com/images/afc536d0-ff99-11ed-a006-17c81341cbe8-Signaturebox-2023-05-31095826.png",
-        "https://www.kfcpakistan.com/images/12dd14f0-c523-11ee-a0b2-43ac3530dd54-KRUNCH-590X480-2024-02-06190812.png",
-        "https://www.kfcpakistan.com/images/afc4e8b0-ff99-11ed-8640-872ee63b5da0-alacart-2023-05-31095826.png",
-        "https://www.kfcpakistan.com/images/eae296d0-c0fa-11ef-9fcf-0f37e3943d32-590x480withoutBG-2024-12-23065538.png",
-        "https://www.kfcpakistan.com/images/afc536d0-ff99-11ed-a006-17c81341cbe8-Signaturebox-2023-05-31095826.png",
-    ];
-
     return (
         <>
             <div className="w-full flex justify-center mb-20">

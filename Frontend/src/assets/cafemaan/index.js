@@ -62,6 +62,13 @@ import Deal8 from "./RegularDeal/Deal8.jpeg";
 import FamilyDeal1 from "./FamilyDeal/Deal1.jpeg";
 import FamilyDeal2 from "./FamilyDeal/Deal2.jpeg";
 import FamilyDeal3 from "./FamilyDeal/Deal2.jpeg";
+
+import curosel1 from "./Carousel/curosel1.jpg";
+import curosel2 from "./Carousel/curosel2.avif";
+import curosel3 from "./Carousel/curosel3.jpg";
+import curosel4 from "./Carousel/curosel4.avif";
+import curosel5 from "./Carousel/curosel5.jpg";
+
 export const menuBar = [
   "Burgers",
   "Paratha",
@@ -631,4 +638,15 @@ export const deals = [
     rating: "4.8",
     category: "Family"
   }
+];
+export const carousel = [curosel1, curosel2, curosel3, curosel4, curosel5];
+export const exploreMenu = [
+  RegularDeal1,
+  Deal2,
+  curosel1,
+  StuffCrustPizza,
+  PattyShawarma,
+  FamilyDeal3,
+  LazaniaPizza,
+  AlferdoPasta
 ];

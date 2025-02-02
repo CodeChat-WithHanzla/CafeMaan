@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { Input, PasswordInputs, FormButton } from '../components';
 import { useNavigate } from 'react-router-dom';
-import { Modal } from 'flowbite-react';
 import axios from 'axios';
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify"
+import { ToastContainer } from "react-toastify";
 const Adminlogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('')
-    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!email || !password) {
-            setError('Email and Password are required');
-            setShowModal(true);
+            toast.error("Email and Password Required")
             return;
         }
         try {
@@ -22,22 +20,21 @@ const Adminlogin = () => {
                 email,
                 password,
             });
-            const { token } = data;    
+            const { token } = data;
             localStorage.setItem('token', token)
 
             setEmail('');
             setPassword('');
             navigate('/dashboard');
         } catch (error) {
-            setError(`There was an error while Login!`);
-            setShowModal(true);
+            toast.error("Check your Email and Password")
         }
 
     };
 
     return (
         <div className="flex min-h-screen w-screen">
-
+            <ToastContainer />
             <img className="object-cover w-full md:w-1/2 hidden md:block" src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735564600/signin_pic.13b93085_lf3gjk.webp" alt="Sign In" />
 
             <div className="bg-[url(https://res.cloudinary.com/dwlbprnr5/image/upload/v1735564436/loginImg_hzrmyx.webp)] bg-cover bg-center min-h-screen w-full md:w-1/2 pb-5">
@@ -55,12 +52,6 @@ const Adminlogin = () => {
                             <FormButton text='SIGN IN' />
                         </div>
                     </form>
-                    <Modal show={showModal} onClose={() => setShowModal(false)}>
-                        <Modal.Header>Error</Modal.Header>
-                        <Modal.Body>
-                            <p>{error}</p>
-                        </Modal.Body>
-                    </Modal>
                 </div>
             </div>
 

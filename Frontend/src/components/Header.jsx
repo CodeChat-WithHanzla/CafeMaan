@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "remixicon/fonts/remixicon.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AddToCardSlider from "../components/AddToCardSlider";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../slice/UserSlice";
@@ -14,6 +14,7 @@ function Header() {
     const userMenuRef = useRef(null);
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -36,7 +37,6 @@ function Header() {
             }
         };
 
-
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -49,16 +49,14 @@ function Header() {
             dispatch(setIsLoggedIn(false));
             navigate('/login');
         } catch (error) {
-            setError(`There was an error while Login!`);
-            setShowModal(true);
+            console.error(`There was an error while logging out:`, error);
         }
         dispatch(logout());
     };
 
     return (
         <header
-            className={`bg-[#121212] text-white w-screen shadow-md sticky z-50 top-0 ${isMenuOpen ? "h-96" : ""
-                }`}
+            className={`bg-[#121212] text-white w-screen shadow-md sticky z-50 top-0 ${isMenuOpen ? "h-96" : ""}`}
         >
             <div className="flex justify-between items-center px-6 py-4 md:px-8">
                 <AddToCardSlider isOpen={isCartOpen} toggleSlider={toggleCartSlider} />
@@ -75,8 +73,7 @@ function Header() {
                 </button>
 
                 <nav
-                    className={`${isMenuOpen ? "block" : "hidden"
-                        } absolute top-20 left-0 w-full bg-[#121212] md:static md:block md:w-auto z-30`}
+                    className={`${isMenuOpen ? "block" : "hidden"} absolute top-20 left-0 w-full bg-[#121212] md:static md:block md:w-auto z-30`}
                 >
                     <ul className="flex flex-col items-center md:flex-row gap-6 md:gap-8 py-4 md:py-0 bg-[#171717] sm:bg-inherit">
                         {["Home", "Menu", "Contact Us", "About"].map((item, index) => {
@@ -91,7 +88,6 @@ function Header() {
                                                 ? "/about-us"
                                                 : "";
 
-
                             const isActive = location.pathname === path;
 
                             return (
@@ -103,10 +99,24 @@ function Header() {
                                             {item}
                                         </div>
                                     </Link>
-                                    <div className={`h-1 bg-yellow-500 w-full absolute bottom-0 scale-x-0 group-hover:scale-x-100 ${isActive ? "scale-x-100" : ""} transition-transform origin-left duration-300`}></div>
+                                    <div
+                                        className={`h-1 bg-yellow-500 w-full absolute bottom-0 scale-x-0 group-hover:scale-x-100 ${isActive ? "scale-x-100" : ""
+                                            } transition-transform origin-left duration-300`}
+                                    ></div>
                                 </li>
                             );
                         })}
+
+                        {/* Admin Tab */}
+                        <li className="relative group">
+                            <Link to="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                                <div
+                                    className={`cursor-pointer text-lg md:text-xl font-bold hover:text-yellow-400 transition duration-300 mb-1`}
+                                >
+                                    Admin
+                                </div>
+                            </Link>
+                        </li>
 
                         <div className="flex justify-center md:hidden gap-4 text-2xl mt-4 relative">
                             <i
@@ -123,7 +133,10 @@ function Header() {
                                     ref={userMenuRef}
                                 >
                                     {isLoggedIn ? (
-                                        <button onClick={handleLogout} className="text-white hover:text-yellow-400 transition duration-300">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="text-white hover:text-yellow-400 transition duration-300"
+                                        >
                                             Logout
                                         </button>
                                     ) : (
@@ -152,11 +165,14 @@ function Header() {
 
                     {isUserMenuOpen && (
                         <div
-                            className="absolute right-0 top-12 bg-[#171717] shadow-lg rounded-md p-4 text-sm font-bold mt-1" 
+                            className="absolute right-0 top-12 bg-[#171717] shadow-lg rounded-md p-4 text-sm font-bold mt-1"
                             ref={userMenuRef}
                         >
                             {isLoggedIn ? (
-                                <button onClick={handleLogout} className="text-white hover:text-yellow-400 transition duration-300">
+                                <button
+                                    onClick={handleLogout}
+                                    className="text-white hover:text-yellow-400 transition duration-300"
+                                >
                                     Logout
                                 </button>
                             ) : (
