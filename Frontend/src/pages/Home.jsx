@@ -24,7 +24,7 @@ function Home() {
         <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-hidden">
             <div className="bg-[#171717] flex-grow">
                 <Carousel />
-                <MenuHeader menuBar={menuBar} />
+                <MenuHeader menuBar={displayedMenuItems} />
             </div>
             <div className="bg-[#121212] flex-grow">
                 <ExploreMenu />

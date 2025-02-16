@@ -4,7 +4,9 @@ import Select from 'react-select';
 const DrinkSelectorSize = ({ selectedOption, handleChange }) => {
     const options = [
         { value: 'Regular', label: 'Regular' },
-        { value: '1.5L', label: '1.5L' }
+        { value: 'Half-Liter', label: 'Half-Liter' },
+        { value: '1.5L', label: '1.5L' },
+        { value: 'Jumbo', label: 'Jumbo' },
     ];
 
     return (

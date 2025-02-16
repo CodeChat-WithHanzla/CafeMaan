@@ -10,12 +10,12 @@ const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems, handle
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(true);
 
-    // Replace this with your actual JazzCash number
-    const jazzCashNumber = "0300-1234567";
-    const jazzCashAccountHolder = "Saleh Ahmed"; // Account holder's name
+    const jazzCashNumber = "0308-4070267";
+    const jazzCashAccountHolder = "Sadaqat Ali";
+    const jazzCashNumber2 = "0309-9737465";
+    const jazzCashAccountHolder2 = "Ahmad Raza";
 
     const handleCashOnDelivery = () => {
-        // Handle Cash on Delivery logic here
         toast.success("Cash on Delivery selected. Your order will be processed.");
         setIsOpen(false);
         handleClose();
@@ -36,13 +36,13 @@ const JazzCashPayment = ({ paymentAmount, paymentMethod, item, cartItems, handle
                             </p>
                         </div>
                         <div className="text-center mb-6">
-                            <p className="text-lg font-medium mb-2">JazzCash Number</p>
+                            <p className="text-lg font-medium mb-2">JazzCash Numbers</p>
                             <p className="text-2xl font-bold text-yellow-400">
-                                {jazzCashNumber}
+                                {jazzCashNumber} / {jazzCashNumber2}
                             </p>
-                            <p className="text-lg font-medium mt-2">Account Holder</p>
+                            <p className="text-lg font-medium mt-2">Account Holders</p>
                             <p className="text-xl font-bold text-yellow-400">
-                                {jazzCashAccountHolder}
+                                {jazzCashAccountHolder} / {jazzCashAccountHolder2}
                             </p>
                         </div>
                         <div className="flex flex-col space-y-4">

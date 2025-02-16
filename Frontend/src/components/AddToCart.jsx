@@ -7,12 +7,11 @@ import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 
 const drinkPrices = {
-    'Pepsi': { 'Regular': 50, '1.5L': 100 },
-    'Coca Cola': { 'Regular': 55, '1.5L': 110 },
-    'Mirinda': { 'Regular': 45, '1.5L': 90 },
-    '7up': { 'Regular': 50, '1.5L': 100 }
+    'Pepsi': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 },
+    'Coca Cola': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 },
+    'Mirinda': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 },
+    '7up': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 }
 };
-
 function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, position }) {
     const basePrice = Price;
     const id = nanoid();
