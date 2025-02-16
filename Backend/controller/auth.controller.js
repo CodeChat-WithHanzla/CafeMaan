@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import User from "../models/User.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -37,16 +37,16 @@ export const registerUser = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      maxAge: 15 * 60 * 1000,
+      maxAge: 15 * 60 * 1000
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     res.status(201).json({
       message: "User registered successfully",
-      user,
+      user
     });
   } catch (error) {
     res
@@ -76,16 +76,16 @@ export const loginUser = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      maxAge: 15 * 60 * 1000,
+      maxAge: 15 * 60 * 1000
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({
       message: "Login successful",
-      user,
+      user
     });
   } catch (error) {
     res.status(500).json({ message: `Error logging in :: ${error.message}` });
