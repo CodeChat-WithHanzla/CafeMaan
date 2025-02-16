@@ -1,12 +1,12 @@
 import React from 'react';
 import { FooterSignature, FooterItem, MapEmbed } from './index';
 import { useNavigate } from 'react-router-dom';
-
+import { menuBar } from "../assets/cafemaan/index";
 function Footer() {
     const navigate = useNavigate();
 
     const Items = [
-        { Heading: "Menu", items: ["Deals", "Chicken Burger", "Beef Burger", "Pizza", "Fries", "Cheeseburger", "Veggie Burger", "Pasta", "Salads", "Shakes", "Desserts"] },
+        { Heading: "Menu", items: menuBar },
         {
             Heading: "Location",
             items: ["Maan Kasur, Punjab, Pakistan"]

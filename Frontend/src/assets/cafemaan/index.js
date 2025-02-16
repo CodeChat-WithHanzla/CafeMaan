@@ -69,6 +69,9 @@ import curosel3 from "./Carousel/curosel3.jpg";
 import curosel4 from "./Carousel/curosel4.avif";
 import curosel5 from "./Carousel/curosel5.jpg";
 
+import AppStore from "../cafemaan/Footer/AppStore.svg";
+import PlayStore from "../cafemaan/Footer/PlayStore.svg";
+
 export const menuBar = [
   "Burgers",
   "Paratha",
@@ -650,3 +653,4 @@ export const exploreMenu = [
   LazaniaPizza,
   AlferdoPasta
 ];
+export const Footer = [AppStore, PlayStore];
