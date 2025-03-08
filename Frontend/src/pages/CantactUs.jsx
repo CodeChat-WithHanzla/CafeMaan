@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import "remixicon/fonts/remixicon.css";
 const ContactUs = () => {
     const [name, setName] = useState('');
@@ -6,8 +7,12 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!name || !message) {
+            toast.error('Please fill all the fields');
+            return;
+        }
         const formattedMessage = `Name: ${name}%0AMessage: ${message}`;
-        const whatsappURL = `https://wa.me/+923254615798?text=${formattedMessage}`;
+        const whatsappURL = `https://wa.me/+923286963283?text=${formattedMessage}`;
         window.open(whatsappURL, '_blank');
     };
 

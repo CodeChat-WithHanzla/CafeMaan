@@ -17,7 +17,7 @@ export const addMenu = async (req, res) => {
       return res.status(400).json({ message: "Missing Details" });
     }
     const imageUpload = await cloudinary.uploader.upload(image.path, {
-      resource_type: "image",
+      resource_type: "image"
     });
     const imageUrl = imageUpload.secure_url;
     const newMenu = new Menu({
@@ -26,7 +26,7 @@ export const addMenu = async (req, res) => {
       Price,
       Rating,
       Category,
-      imageUrl,
+      imageUrl
     });
 
     await newMenu.save();
@@ -43,7 +43,7 @@ export const updateMenu = async (req, res) => {
     if (req.file) {
       const image = req.file;
       const imageUpload = await cloudinary.uploader.upload(image.path, {
-        resource_type: "image",
+        resource_type: "image"
       });
       imageUrl = imageUpload.secure_url;
       updates.imageUrl = imageUrl;
@@ -51,7 +51,7 @@ export const updateMenu = async (req, res) => {
 
     const updatedMenu = await Menu.findByIdAndUpdate(id, updates, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
 
     if (!updatedMenu) {
@@ -75,6 +75,17 @@ export const deleteMenu = async (req, res) => {
     }
 
     res.status(200).json({ message: "Menu deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+export const getMenuById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ message: "Id required!" });
+    const menu = await Menu.findById(id);
+    if (!menu) return res.status(404).json({ message: "Menu Not Found!" });
+    res.status(200).json({ menu });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

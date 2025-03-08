@@ -1,18 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-@import "flowbite";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: Outfit;
+    font-family: Outfit;
 }
 
-ul::-webkit-scrollbar {
-  display: none;
-}
-
-ul {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+::-webkit-scrollbar {
+    @apply hidden;
 }

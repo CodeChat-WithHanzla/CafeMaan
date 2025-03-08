@@ -59,19 +59,6 @@ function Footer() {
                     <MapEmbed />
                 </div>
             </div>
-            <div className="text-center mt-5 -mb-1">
-                All Rights Reserved. 2024© CaféMaan
-                <div className="font-mono">
-                    POWERED BY{' '}
-                    <a
-                        href="https://github.com/CodeChat-WithHanzla/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <span className="cursor-pointer text-yellow-300">HanzlaDev.</span>
-                    </a>
-                </div>
-            </div>
         </div>
     );
 }

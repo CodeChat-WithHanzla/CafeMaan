@@ -4,6 +4,7 @@ import {
   addMenu,
   updateMenu,
   deleteMenu,
+  getMenuById
 } from "./menu.controller.js";
 export const loginAdmin = async (req, res) => {
   try {
@@ -14,7 +15,7 @@ export const loginAdmin = async (req, res) => {
     ) {
       const token = jwt.sign(email + password, process.env.JWT_SECRET);
       res.header("Authorization", `Bearer ${token}`);
-      res.status(200).json({ token });
+      res.status(200).json({ aToken: token });
     } else {
       res.status(401).json({ message: "Unauthorized access" });
     }
@@ -23,4 +24,4 @@ export const loginAdmin = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
-export { getAllMenu, addMenu, updateMenu, deleteMenu };
+export { getAllMenu, addMenu, updateMenu, deleteMenu, getMenuById };
