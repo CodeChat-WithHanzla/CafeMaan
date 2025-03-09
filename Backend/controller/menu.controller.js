@@ -90,3 +90,14 @@ export const getMenuById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const getMenuByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+    if (!category)
+      return res.status(400).json({ message: "Category required!" });
+    const menus = await Menu.find({ Category: category });
+    res.status(200).json(menus);
+  } catch {
+    res.status(500).json({ message: error.message });
+  }
+};

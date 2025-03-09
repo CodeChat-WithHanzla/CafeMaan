@@ -7,11 +7,11 @@ function NavBar() {
     const navigate = useNavigate();
 
     const logout = () => {
-        navigate('/');
         if (aToken) {
             localStorage.removeItem('aToken');
             setAToken('');
         }
+        navigate('/');
     };
 
     return (

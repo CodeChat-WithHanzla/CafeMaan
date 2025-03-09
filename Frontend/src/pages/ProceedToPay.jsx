@@ -32,7 +32,7 @@ const ProceedToPay = () => {
 
     const handleClosePayment = () => {
         setShowPayment(false);
-        setSelectedItem(null); 
+        setSelectedItem(null);
     };
 
     return (
@@ -98,7 +98,7 @@ const ProceedToPay = () => {
                             <p>{selectedItem.DealText}</p>
                             <p>Price: Rs. {selectedItem.Price}</p>
                             <p>Quantity: {selectedItem.quantity}</p>
-                            <p>Selected Drink: {selectedItem.selectedDrink} ({selectedItem.selectedDrinkSize})</p>
+                            <p>Selected Drink: {selectedItem.selectedDrink} {selectedItem.selectedDrinkSize}</p>
 
                             {Array.isArray(selectedItem.selectedAddOns) && selectedItem.selectedAddOns.length > 0 && (
                                 <div>

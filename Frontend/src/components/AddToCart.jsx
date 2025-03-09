@@ -49,7 +49,6 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         }
     };
 
-
     const handleQuantityChange = (action) => {
         setQuantity((prevQuantity) => {
             let newQuantity;
@@ -107,10 +106,11 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         if (rating) newFormData.rating = rating;
         if (category) newFormData.category = category;
         if (selectedDrink) newFormData.selectedDrink = selectedDrink;
-        if (selectedOption?.value) newFormData.selectedDrinkSize = selectedOption.value;
+        if (selectedOption.value) newFormData.selectedDrinkSize = selectedOption.value;
         if (quantity) newFormData.quantity = quantity;
         if (selectedAddOns.length > 0) newFormData.selectedAddOns = selectedAddOns;
-
+        
+        
         setShowCart(false);
         dispatch(addToCart(newFormData));
         navigate('/pay');

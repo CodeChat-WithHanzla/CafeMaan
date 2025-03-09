@@ -7,7 +7,7 @@ function ExploreMenu() {
         <>
             <div className="w-full flex justify-center mb-20">
                 <div className="relative group mt-10">
-                    <div className="text-white text-3xl mb-3 font-bold cursor-pointer">
+                    <div onClick={() => navigate('/menu')} className="text-white text-3xl mb-3 font-bold cursor-pointer">
                         EXPLORE MENU
                     </div>
                     <div className="h-1 bg-yellow-500 w-full absolute bottom-0 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>

@@ -16,6 +16,7 @@ const cartSlice = createSlice({
         selectedDrink,
         quantity,
         selectedAddOns,
+        selectedDrinkSize
       } = action.payload;
       const existingItem = state.find((item) => item.id === id);
 
@@ -31,8 +32,9 @@ const cartSlice = createSlice({
           rating,
           category,
           selectedDrink,
+          selectedDrinkSize,
           quantity,
-          selectedAddOns,
+          selectedAddOns
         });
       }
     },
@@ -41,8 +43,8 @@ const cartSlice = createSlice({
     },
     clearCart: () => {
       return [];
-    },
-  },
+    }
+  }
 });
 
 export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
