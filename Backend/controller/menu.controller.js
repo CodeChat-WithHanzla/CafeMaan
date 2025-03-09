@@ -97,7 +97,7 @@ export const getMenuByCategory = async (req, res) => {
       return res.status(400).json({ message: "Category required!" });
     const menus = await Menu.find({ Category: category });
     res.status(200).json(menus);
-  } catch {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

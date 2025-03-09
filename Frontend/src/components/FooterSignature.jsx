@@ -16,17 +16,23 @@ function FooterSignature() {
                 <div className="flex justify-center gap-4 my-3">
 
                     <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                        <i className="ri-facebook-fill text-3xl text-white cursor-pointer"></i>
+                        <a href="https://www.facebook.com/share/18pZLmLSKM/" target="_blank" rel="noopener noreferrer">
+                            <i className="ri-facebook-fill text-3xl text-white cursor-pointer"></i>
+                        </a>
                     </div>
 
 
                     <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                        <i className="ri-instagram-line text-3xl text-white cursor-pointer"></i>
+                        <a href="https://tiktok.com/@cafemaan6" target="_blank" rel="noopener noreferrer">
+                            <i className="ri-instagram-line text-3xl text-white cursor-pointer"></i>
+                        </a>
                     </div>
 
 
                     <div className="bg-[#FCB116] rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                        <i className="ri-tiktok-line text-3xl text-white cursor-pointer"></i>
+                        <a href="https://tiktok.com/@cafemaan6" target="_blank" rel="noopener noreferrer">
+                            <i className="ri-tiktok-line text-3xl text-white cursor-pointer"></i>
+                        </a>
                     </div>
                 </div>
 
