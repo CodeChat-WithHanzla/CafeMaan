@@ -5,7 +5,7 @@ export const AdminContext = createContext()
 const AdminContextProvider = ({ children }) => {
     const [aToken, setAToken] = useState(localStorage.getItem('aToken') || '')
     const [menus, setMenus] = useState([])
-
+    const [orders, setOrders] = useState([])
     const BackendUrl = import.meta.env.VITE_BACKEND_URL
     const getAllMenus = async () => {
         try {
@@ -108,8 +108,60 @@ const AdminContextProvider = ({ children }) => {
             }
         }
     }
+    const getAllOrders = async () => {
+        try {
+            const { data, status } = await axios.get(`${BackendUrl}/admin/orders`, { headers: { Authorization: `Bearer ${aToken}` } })
+            if (status === 200)
+                setOrders(data)
+
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message || "Something went wrong.");
+            } else if (error.request) {
+                toast.error("No response from the server. Please try again later.");
+            } else {
+                toast.error(`Error: ${error.message}`);
+            }
+        }
+
+    }
+    const updateOrderStatus = async (query, id) => {
+        try {
+            const { data, status } = await axios.put(`${BackendUrl}/admin/orders/${id}/${query}`, {}, { headers: { Authorization: `Bearer ${aToken}` } })
+            if (status === 200)
+                setOrders(data)
+            toast.success(`Order status updated to ${query}`);
+
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message || "Something went wrong.");
+            } else if (error.request) {
+                toast.error("No response from the server. Please try again later.");
+            } else {
+                toast.error(`Error: ${error.message}`);
+            }
+        }
+    }
+    const paymentCompleted = async (id) => {
+        try {
+            const { data, status } = await axios.put(`${BackendUrl}/admin/orders/${id}/payment`, {}, { headers: { Authorization: `Bearer ${aToken}` } })
+            if (status === 200)
+                setOrders(data)
+            toast.success(`Order payment is done.`)
+
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message || "Something went wrong.");
+            } else if (error.request) {
+                toast.error("No response from the server. Please try again later.");
+            } else {
+                toast.error(`Error: ${error.message}`);
+            }
+        }
+    }
     const value = {
         aToken, setAToken, BackendUrl, getAllMenus, menus, addMenu, updateMenu, deleteMenu, getMenuById
+        , orders, getAllOrders, updateOrderStatus, paymentCompleted
     }
     return (
         <AdminContext.Provider value={value}>

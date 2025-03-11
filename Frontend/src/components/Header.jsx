@@ -4,8 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import AddToCardSlider from "../components/AddToCardSlider";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../slice/UserSlice";
-import axios from 'axios';
-import { setIsLoggedIn } from '../slice/UserSlice';
+import { setIsLoggedIn, setUserData } from '../slice/UserSlice';
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +30,8 @@ function Header() {
             if (
                 userMenuRef.current &&
                 !userMenuRef.current.contains(event.target) &&
-                !event.target.closest(".ri-user-3-fill")
+                !event.target.closest(".ri-user-3-fill") &&
+                !event.target.closest("a")
             ) {
                 setIsUserMenuOpen(false);
             }
@@ -43,10 +43,12 @@ function Header() {
         };
     }, [isUserMenuOpen]);
 
+
     const handleLogout = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/logout`);
             dispatch(setIsLoggedIn(false));
+            dispatch(setUserData(null))
+            localStorage.removeItem("token");
             navigate('/login');
         } catch (error) {
             console.error(`There was an error while logging out:`, error);
@@ -123,10 +125,10 @@ function Header() {
                                 onClick={toggleUserMenu}
                                 className="ri-user-3-fill hover:text-yellow-400 transition duration-300"
                             ></i>
-                            <i
+                            {isLoggedIn && <i
                                 onClick={toggleCartSlider}
                                 className="ri-shopping-cart-2-fill hover:text-yellow-400 transition duration-300"
-                            ></i>
+                            ></i>}
                             {isUserMenuOpen && (
                                 <div
                                     className="absolute right-0 top-12 bg-[#171717] shadow-lg rounded-md p-4 text-sm font-bold mt-1"
@@ -158,10 +160,12 @@ function Header() {
                         className="ri-user-3-fill hover:text-yellow-400 transition duration-300 cursor-pointer font-bold"
                         onClick={toggleUserMenu}
                     ></i>
-                    <i
-                        onClick={toggleCartSlider}
-                        className="ri-shopping-cart-2-fill hover:text-yellow-400 transition duration-300 font-bold"
-                    ></i>
+                    {isLoggedIn &&
+                        <i
+                            onClick={toggleCartSlider}
+                            className="ri-shopping-cart-2-fill hover:text-yellow-400 transition duration-300 font-bold"
+                        ></i>
+                    }
 
                     {isUserMenuOpen && (
                         <div

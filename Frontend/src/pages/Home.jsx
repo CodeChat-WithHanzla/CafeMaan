@@ -53,6 +53,7 @@ function Home() {
                     imageUrl={selectedItem.imageUrl}
                     rating={selectedItem.rating}
                     category={selectedItem.category}
+                    _id={selectedItem._id}
                 />
             )}
         </div>

@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required"],
       minlength: [3, "Name must be at least 3 characters long"],
-      maxlength: [50, "Name must be less than 50 characters"],
+      maxlength: [50, "Name must be less than 50 characters"]
     },
     email: {
       type: String,
@@ -15,22 +15,19 @@ const userSchema = new Schema(
       unique: true,
       match: [
         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-        "Please provide a valid email address",
-      ],
+        "Please provide a valid email address"
+      ]
     },
     phoneNumber: {
       type: String,
       required: [true, "Phone number is required"],
-      match: [/^\d{10,15}$/, "Phone number must be between 10 and 15 digits"],
+      match: [/^\d{10,15}$/, "Phone number must be between 10 and 15 digits"]
     },
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 characters long"],
-    },
-    refreshToken: {
-      type: String,
-    },
+      minlength: [6, "Password must be at least 6 characters long"]
+    }
   },
   { timestamps: true }
 );

@@ -20,13 +20,17 @@ const Login = () => {
             return;
         }
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
+            const { status, data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
                 email,
                 password,
             });
-            const { user } = response.data;
-            dispatch(setUserData(user));
-            dispatch(setIsLoggedIn(true));
+            if (status === 200) {
+                const { user, token } = data;
+                dispatch(setUserData(user));
+                localStorage.setItem("token", token);
+                dispatch(setIsLoggedIn(true));
+            }
+
 
             setEmail('');
             setPassword('');

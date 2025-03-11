@@ -37,6 +37,7 @@ function MenuItems({ item, setShowCart }) {
                         imageUrl={deal.imageUrl}
                         rating={deal.Rating}
                         category={deal.Category}
+                        _id={deal._id}
                     />
                 ))}
             </div>

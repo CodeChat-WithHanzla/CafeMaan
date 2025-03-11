@@ -5,7 +5,6 @@ import {
   logoutUser
 } from "../controller/auth.controller.js";
 import { getMenuByCategory } from "../controller/menu.controller.js";
-
 const router = Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);

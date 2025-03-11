@@ -51,7 +51,6 @@ function UpdateMenu() {
             }
 
             await updateMenu(id, formData);
-            toast.success('Menu updated successfully');
         } catch (error) {
             toast.error('Error updating menu');
         }

@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import userRouter from "./routes/user.routes.js";
 const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL,
@@ -33,4 +34,5 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
+app.use("/user", userRouter);
 export default app;

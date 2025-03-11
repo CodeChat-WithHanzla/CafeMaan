@@ -2,17 +2,57 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "../slice/CartSlice";
 import { JazzCashPayment } from "../components";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 const ProceedToPay = () => {
     const cartItems = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [showPayment, setShowPayment] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
-    const handlePayClick = () => {
-        setShowPayment(true);
+    const handlePayClick = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            toast.error("You need to log in first to continue.");
+            navigate('/login');
+            return;
+        }
+
+        if (!selectedItem) {
+            toast.error("Please select an item before proceeding to payment.");
+            return;
+        }
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_BASE_URL}/user/orders`,
+                {
+                    menuId: selectedItem.id,
+                    DealHeading: selectedItem.DealHeading,
+                    DealText: selectedItem.DealText,
+                    Price: selectedItem.Price,
+                    imageUrl: selectedItem.imageUrl,
+                    category: selectedItem.category,
+                    selectedDrink: selectedItem.selectedDrink,
+                    quantity: selectedItem.quantity,
+                    selectedAddOns: selectedItem.selectedAddOns,
+                    selectedDrinkSize: selectedItem.selectedDrinkSize
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            if (response.status === 201) {
+                toast.success("Order has been processed successfully.");
+                setShowPayment(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to process order.");
+        }
     };
 
     const handleRemoveItem = (id) => {
@@ -78,15 +118,6 @@ const ProceedToPay = () => {
                                 className="w-full bg-red-600 text-white py-3 rounded-lg mb-4 hover:bg-red-500 transition-all"
                             >
                                 Clear Cart
-                            </button>
-                        )}
-
-                        {cartItems.length > 0 && !showPayment && (
-                            <button
-                                onClick={handlePayClick}
-                                className="w-full bg-yellow-500 text-black py-3 rounded-lg hover:bg-yellow-400 transition-all"
-                            >
-                                Pay All
                             </button>
                         )}
                     </>

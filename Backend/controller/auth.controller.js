@@ -3,18 +3,12 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const generateTokens = (user) => {
-  const accessToken = jwt.sign(
+  const token = jwt.sign(
     { id: user._id, email: user.email },
     process.env.JWT_SECRET,
-    { expiresIn: "15m" }
+    { expiresIn: "30d" }
   );
-
-  const refreshToken = jwt.sign(
-    { id: user._id, email: user.email },
-    process.env.JWT_REFRESH_SECRET,
-    { expiresIn: "7d" }
-  );
-  return { accessToken, refreshToken };
+  return { token };
 };
 
 export const registerUser = async (req, res) => {
@@ -31,22 +25,12 @@ export const registerUser = async (req, res) => {
     }
     const user = new User({ name, email, phoneNumber, password });
     await user.save();
-    const { accessToken, refreshToken } = generateTokens(user);
-    user.refreshToken = refreshToken;
+    const { token } = generateTokens(user);
     await user.save();
-
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      maxAge: 15 * 60 * 1000
-    });
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
-
     res.status(201).json({
       message: "User registered successfully",
-      user
+      user,
+      token
     });
   } catch (error) {
     res
@@ -68,24 +52,12 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
-
-    const { accessToken, refreshToken } = generateTokens(user);
-
-    user.refreshToken = refreshToken;
+    const { token } = generateTokens(user);
     await user.save();
-
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      maxAge: 15 * 60 * 1000
-    });
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
-
     res.status(200).json({
       message: "Login successful",
-      user
+      user,
+      token
     });
   } catch (error) {
     res.status(500).json({ message: `Error logging in :: ${error.message}` });

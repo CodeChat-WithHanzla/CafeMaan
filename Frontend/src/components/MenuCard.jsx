@@ -2,11 +2,11 @@ import React from 'react';
 import { AddToCartButton } from './index';
 import { useDispatch, } from "react-redux"
 import { setSelectedItem } from "../slice/SelectedSlice"
-function MenuCard({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category }) {
+function MenuCard({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, _id }) {
 
     const dispatch = useDispatch();
     const handleSelectedItem = () => {
-        dispatch(setSelectedItem({ DealHeading, DealText, Price, imageUrl, rating, category }));
+        dispatch(setSelectedItem({ DealHeading, DealText, Price, imageUrl, rating, category, _id }));
         setShowCart(true)
     }
     return (

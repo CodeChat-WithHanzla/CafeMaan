@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router';
 import AllMenu from './pages/admin/AllMenus';
 import AddMenu from './pages/admin/AddMenu';
 import UpdateMenu from './pages/admin/UpdateMenu';
+import AllOrders from './pages/admin/AllOrders';
 
 function App() {
   const { aToken } = useContext(AdminContext);
@@ -22,6 +23,7 @@ function App() {
           {/* Admin Routes */}
           <Route path='/' element={<></>} />
           <Route path='/admin-menus' element={<AllMenu />} />
+          <Route path='/admin-orders' element={<AllOrders />} />
           <Route path='/add-menu' element={<AddMenu />} />
           <Route path='/update-menu/:id' element={<UpdateMenu />} />
 
