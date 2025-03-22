@@ -4,8 +4,8 @@ import Menu from "./Menu";
 import ContactUs from "./CantactUs";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import ForgetPassword from "./ForgetPassword";
 import ProceedToPay from "./ProceedToPay";
+import NotFound from "./NotFound";
 export {
   Home,
   AboutUs,
@@ -13,6 +13,6 @@ export {
   ContactUs,
   Login,
   SignUp,
-  ForgetPassword,
-  ProceedToPay
+  ProceedToPay,
+  NotFound
 };

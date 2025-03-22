@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const handleSubmit = async (e) => {
@@ -20,6 +21,7 @@ const Login = () => {
             return;
         }
         try {
+            setLoading(true)
             const { status, data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
                 email,
                 password,
@@ -37,6 +39,9 @@ const Login = () => {
             navigate('/');
         } catch (error) {
             toast.error("Check your Email and Password")
+        }
+        finally {
+            setLoading(false)
         }
 
     };
@@ -56,7 +61,7 @@ const Login = () => {
                         <Input value={email} setValue={setEmail} label="Enter Email" placeholder="Email" type='email' autoComplete='email' />
                         <PasswordInputs label='Enter Password' value={password} setValue={setPassword} autoComplete="current-password" />
                         <div className='w-full flex justify-center items-center'>
-                            <FormButton text='SIGN IN' />
+                            <FormButton text='SIGN IN' isLoading={loading} />
                         </div>
 
                         <p className="lg:text-[16px] text-[16px] text-center text-[rgb(255,247,232)] font-semibold leading-normal mt-8 sm:mt-6 md:font-bold">

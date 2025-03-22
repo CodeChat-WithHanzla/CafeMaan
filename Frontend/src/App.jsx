@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ForgetPassword, ProceedToPay } from "./pages/index";
+import { Home, AboutUs, Menu, ContactUs, Login, SignUp, ProceedToPay, NotFound } from "./pages/index";
 import { Header, Footer, ScrollToTop } from "./components";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -13,14 +13,13 @@ function AppContent() {
   const isLoginOrSignUpPage =
     location.pathname === "/login" ||
     location.pathname === "/sign-up" ||
-    location.pathname === "/forget-password" ||
     location.pathname === "/admin/login"
     ;
 
   return (
     <div className="flex flex-col min-h-screen">
       <ScrollToTop />
-      <ToastContainer/>
+      <ToastContainer />
       {!isLoginOrSignUpPage && <Header />}
       <main className="flex-1">
         <Routes>
@@ -30,8 +29,8 @@ function AppContent() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/pay" element={<ProceedToPay />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {!isLoginOrSignUpPage && <Footer />}

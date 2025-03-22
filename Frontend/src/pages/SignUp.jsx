@@ -14,6 +14,7 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -37,6 +38,7 @@ const SignUp = () => {
             return;
         }
         try {
+            setLoading(true)
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/register`, {
                 name,
                 email,
@@ -58,6 +60,9 @@ const SignUp = () => {
         } catch (error) {
             setError(`There was an error registering! ${error.message}`);
             setShowModal(true);
+        }
+        finally {
+            setLoading(false)
         }
         setName('')
         setEmail('')
@@ -82,7 +87,7 @@ const SignUp = () => {
                         <Input value={phoneNumber} setValue={setPhoneNumber} label="Enter Phone Number (e.g 0321.......)" placeholder="Phone Number" type='tel' autoComplete='tel' />
                         <PasswordInputs label='Enter Password' value={password} setValue={setPassword} autocomplete="new-password" />
                         <PasswordInputs label='Confirm Password' value={confirmPassword} setValue={setConfirmPassword} autoComplete="new-password" />
-                        <FormButton text='SIGN UP' />
+                        <FormButton text='SIGN UP' isLoading={loading} />
                         <p className="lg:text-[16px] text-[16px] text-center text-[rgb(255,247,232)] font-semibold leading-normal mt-8 sm:mt-6 md:font-bold">
                             Already have an account? <span className="text-[#FCB116] cursor-pointer" onClick={() => navigate('/login')}>Sign In</span>
                         </p>

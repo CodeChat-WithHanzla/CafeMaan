@@ -10,6 +10,7 @@ function AddMenu() {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
     const [rating, setRating] = useState(1);
+    const [loading, setLoading] = useState(false);
     const { addMenu } = useContext(AdminContext);
 
     const categories = [
@@ -22,7 +23,7 @@ function AddMenu() {
         try {
             if (!menuImg) return toast.error("Please Upload Menu Image");
             if (rating < 1 || rating > 5) return toast.error("Rating should be between 1 and 5");
-
+            setLoading(true);
             const formData = new FormData();
             formData.append("DealHeading", dealHeading);
             formData.append("DealText", dealText);
@@ -40,6 +41,9 @@ function AddMenu() {
             setRating(1);
         } catch (error) {
             toast.error("Error During Adding Menu");
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -109,8 +113,20 @@ function AddMenu() {
                     </div>
                 </div>
 
-                <button type="submit" className="bg-[#FCB116] text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b]">
-                    Add Menu
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className={`bg-[#FCB116] text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b] flex items-center justify-center gap-2 transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
+                >
+                    {loading ? (
+                        <>
+                            <div className="animate-spin border-t-2 border-b-2 border-black rounded-full w-5 h-5"></div>
+                            Adding...
+                        </>
+                    ) : (
+                        "Add Menu"
+                    )}
                 </button>
             </div>
         </form>

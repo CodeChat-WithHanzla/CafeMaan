@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MenuItems, AddToCart, ExploreMenu, MenuHeader } from '../components';
+import { MenuItems, AddToCart, MenuHeader } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
 import { menuBar } from '../assets/cafemaan';
@@ -23,11 +23,11 @@ function Menu() {
 
     return (
         <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-x-hidden">
-            <div className="bg-[#171717] w-screen">
+            <div className={`bg-[#171717] w-screen fixed ${!(selectedItem && showCart) ? "z-10" : ""}`}>
                 <MenuHeader menuBar={menuBar} />
             </div>
 
-            <div className="bg-[#121212] flex-grow mt-20 w-screen">
+            <div className="bg-[#121212] flex-grow  w-screen mt-[200px]">
                 {menuBar.map((item, index) => (
                     <div key={index} id={item.replace(/\s/g, "")} className="min-h-[80vh] p-6">
                         <MenuItems item={item} setShowCart={setShowCart} />

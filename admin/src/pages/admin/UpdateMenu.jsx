@@ -13,6 +13,7 @@ function UpdateMenu() {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [rating, setRating] = useState(1);
+    const [loading, setLoading] = useState(false);
     const categories = [
         "Burgers", "Paratha", "Sandwich", "Pasta", "Crispy Special", "Shawarma", "Fries", "Pizza", "Regular", "Family"
     ];
@@ -40,6 +41,7 @@ function UpdateMenu() {
             if (rating < 1 || rating > 5) {
                 return toast.error('Rating should be between 1 and 5');
             }
+            setLoading(true);
             const formData = new FormData();
             formData.append('DealHeading', dealHeading);
             formData.append('DealText', dealText);
@@ -53,6 +55,9 @@ function UpdateMenu() {
             await updateMenu(id, formData);
         } catch (error) {
             toast.error('Error updating menu');
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -141,7 +146,21 @@ function UpdateMenu() {
                     </div>
                 </div>
 
-                <button type='submit' className='bg-[#FCB116] text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b]'>Update Menu</button>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className={`bg-[#FCB116] text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b] flex items-center justify-center gap-2 transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
+                >
+                    {loading ? (
+                        <>
+                            <div className="animate-spin border-t-2 border-b-2 border-black rounded-full w-5 h-5"></div>
+                            Updating...
+                        </>
+                    ) : (
+                        "Update Menu"
+                    )}
+                </button>
             </div>
         </form>
     );

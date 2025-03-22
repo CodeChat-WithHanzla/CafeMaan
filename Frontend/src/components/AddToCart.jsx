@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../slice/CartSlice';
 import { Rating } from 'flowbite-react';
 import { AddToCartButton, AddOns, Options, DrinkSelectorSize } from './index';
-import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 const drinkPrices = {
     'Pepsi': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 },
@@ -16,7 +16,7 @@ const drinkPrices = {
 };
 function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, position, _id }) {
     console.log(_id);
-    
+
     const basePrice = Price;
     const id = _id;
     const [price, setPrice] = useState(Price);
@@ -26,8 +26,8 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
     const [selectedAddOns, setSelectedAddOns] = useState([]);
     const [selectedDrink, setSelectedDrink] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
+    const { isLoggedIn } = useSelector(state => state.user);
     const navigate = useNavigate();
-
     useEffect(() => {
         setPrice(Price);
         if (position) {
@@ -103,6 +103,10 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
     const submitHandler = () => {
         if (selectedDrink && !selectedOption?.value) {
             toast.error("Oops! You forgot to choose a drink size. Please select one.");
+            return;
+        }
+        if (!isLoggedIn) {
+            toast.error("Please login to continue.");
             return;
         }
         const newFormData = {};
