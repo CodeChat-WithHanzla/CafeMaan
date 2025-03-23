@@ -5,6 +5,7 @@ import { Modal } from 'flowbite-react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUserData, setIsLoggedIn } from '../slice/UserSlice';
+import { toast, ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
     const [name, setName] = useState('')
@@ -12,8 +13,6 @@ const SignUp = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [error, setError] = useState('')
-    const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -21,20 +20,16 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name || !email || !phoneNumber || !password || !confirmPassword) {
-            setError('All fields are required');
-            setShowModal(true);
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
-            setShowModal(true);
+            toast.error('All fields are required');
             return;
         }
         const phoneRegex = /^03\d{9}$/;
         if (!phoneRegex.test(phoneNumber)) {
-            setError('Phone number must start with 03 and be followed by 9 digits.');
-            setShowModal(true);
+            toast.error('Phone number must start with 03 and be followed by 9 digits.');
+            return;
+        }
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
             return;
         }
         try {
@@ -46,8 +41,9 @@ const SignUp = () => {
                 password,
                 confirmPassword,
             });
-            const { user } = response.data;
+            const { user, token } = response.data;
             dispatch(setUserData(user));
+            localStorage.setItem("token", token);
             dispatch(setIsLoggedIn(true));
 
             setName('');
@@ -58,21 +54,21 @@ const SignUp = () => {
             navigate('/');
 
         } catch (error) {
-            setError(`There was an error registering! ${error.message}`);
-            setShowModal(true);
+            toast.error(`There was an error registering! ${error.message}`);
         }
         finally {
             setLoading(false)
         }
-        setName('')
-        setEmail('')
-        setPhoneNumber('')
-        setPassword('')
-        setConfirmPassword('')
+        // setName('')
+        // setEmail('')
+        // setPhoneNumber('')
+        // setPassword('')
+        // setConfirmPassword('')
     };
 
     return (
         <div className="flex min-h-screen w-screen">
+            <ToastContainer />
             <img className="object-cover w-full md:w-1/2 hidden md:block" src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735564600/signin_pic.13b93085_lf3gjk.webp" alt="Sign In" />
 
             <div className="bg-[url(https://res.cloudinary.com/dwlbprnr5/image/upload/v1735564436/loginImg_hzrmyx.webp)] bg-cover bg-center min-h-screen w-full md:w-1/2 pb-5">
@@ -92,12 +88,6 @@ const SignUp = () => {
                             Already have an account? <span className="text-[#FCB116] cursor-pointer" onClick={() => navigate('/login')}>Sign In</span>
                         </p>
                     </form>
-                    <Modal show={showModal} onClose={() => setShowModal(false)}>
-                        <Modal.Header>Error</Modal.Header>
-                        <Modal.Body>
-                            <p>{error}</p>
-                        </Modal.Body>
-                    </Modal>
                 </div>
             </div>
         </div>

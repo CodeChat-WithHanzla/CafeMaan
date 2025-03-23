@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "../slice/CartSlice";
 import { JazzCashPayment } from "../components";
@@ -55,13 +55,40 @@ const ProceedToPay = () => {
         }
     };
 
-    const handleRemoveItem = (id) => {
-        console.log(id);
-        dispatch(removeFromCart(id));
+    const handleRemoveItem = async (id) => {
+        try {
+            const { status } = await axios.delete(`${import.meta.env.VITE_BASE_URL}/user/cart/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            if (status === 200) {
+                toast.success("Cart has been cleared successfully.");
+                dispatch(removeFromCart(id));
+            }
+        } catch (error) {
+            console.log(error.message);
+            toast.error("Something went wrong. Please try again later.");
+
+        }
     };
 
-    const handleClearCart = () => {
-        dispatch(clearCart());
+    const handleClearCart = async () => {
+        try {
+            const { status } = await axios.delete(`${import.meta.env.VITE_BASE_URL}/user/cart`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            if (status === 200) {
+                toast.success("Cart has been cleared successfully.");
+                dispatch(clearCart());
+            }
+        } catch (error) {
+            console.log(error.message);
+            toast.error("Something went wrong. Please try again later.");
+
+        }
     };
 
     const handleItemClick = (item) => {

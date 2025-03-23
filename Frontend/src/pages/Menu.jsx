@@ -37,6 +37,7 @@ function Menu() {
 
             {selectedItem && showCart && (
                 <AddToCart
+                    _id={selectedItem._id}
                     setShowCart={setShowCart}
                     DealHeading={selectedItem.DealHeading}
                     DealText={selectedItem.DealText}

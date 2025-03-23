@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const drinkPrices = {
     'Pepsi': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 },
@@ -15,8 +16,6 @@ const drinkPrices = {
     '7up': { 'Regular': 60, "Half-Liter": 100, '1.5L': 130, "Jumbo": 240 }
 };
 function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating, category, position, _id }) {
-    console.log(_id);
-
     const basePrice = Price;
     const id = _id;
     const [price, setPrice] = useState(Price);
@@ -100,13 +99,14 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         return 0;
     };
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
         if (selectedDrink && !selectedOption?.value) {
             toast.error("Oops! You forgot to choose a drink size. Please select one.");
             return;
         }
         if (!isLoggedIn) {
             toast.error("Please login to continue.");
+            navigate('/login');
             return;
         }
         const newFormData = {};
@@ -124,6 +124,27 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         if (quantity) newFormData.quantity = quantity;
         if (selectedAddOns.length > 0) newFormData.selectedAddOns = selectedAddOns;
         setShowCart(false);
+        console.log(newFormData, _id);
+        try {
+            const { status } = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/cart`, {
+                menuId: id,
+                quantity,
+                selectedDrink,
+                selectedDrinkSize: selectedOption.value,
+                selectedAddOns
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            if (status === 201) {
+                toast.success("Item added to cart successfully")
+            }
+        } catch (error) {
+            console.log(error.message);
+            toast.error("Something went wrong. Please try again later.", error.message);
+
+        }
         dispatch(addToCart(newFormData));
         navigate('/pay');
     };

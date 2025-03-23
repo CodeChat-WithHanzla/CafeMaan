@@ -39,7 +39,8 @@ const OrderSchema = new Schema(
       default: 1
     },
     selectedAddOns: {
-      type: [String],
+      name: { type: String },
+      price: { type: Number },
       default: []
     },
     selectedDrinkSize: {
