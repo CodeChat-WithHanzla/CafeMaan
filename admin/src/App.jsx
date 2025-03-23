@@ -10,7 +10,7 @@ import AllMenu from './pages/admin/AllMenus';
 import AddMenu from './pages/admin/AddMenu';
 import UpdateMenu from './pages/admin/UpdateMenu';
 import AllOrders from './pages/admin/AllOrders';
-
+import Order from './pages/admin/Order';
 function App() {
   const { aToken } = useContext(AdminContext);
   return aToken ? (
@@ -24,6 +24,7 @@ function App() {
           <Route path='/' element={<></>} />
           <Route path='/admin-menus' element={<AllMenu />} />
           <Route path='/admin-orders' element={<AllOrders />} />
+          <Route path='/admin-orders/:orderId' element={<Order />} />
           <Route path='/add-menu' element={<AddMenu />} />
           <Route path='/update-menu/:id' element={<UpdateMenu />} />
 

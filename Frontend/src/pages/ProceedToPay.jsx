@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "../slice/CartSlice";
 import { JazzCashPayment } from "../components";
@@ -23,7 +23,6 @@ const ProceedToPay = () => {
             navigate('/login');
             return;
         }
-
         if (!selectedItem) {
             toast.error("Please select an item before proceeding to payment.");
             return;
@@ -48,6 +47,8 @@ const ProceedToPay = () => {
 
             if (response.status === 201) {
                 toast.success("Order has been processed successfully.");
+                console.log(response);
+
                 setShowPayment(true);
             }
         } catch (error) {

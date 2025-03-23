@@ -49,6 +49,7 @@ function AllOrders() {
                 {orders?.length > 0 ? (
                     orders.map((order, index) => (
                         <div
+                            onClick={() => { navigate(`/admin-orders/${order._id}`) }}
                             key={order._id}
                             className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white"
                         >
