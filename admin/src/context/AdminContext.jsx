@@ -141,6 +141,9 @@ const AdminContextProvider = ({ children }) => {
                 toast.error(`Error: ${error.message}`);
             }
         }
+        finally {
+            getAllOrders()
+        }
     }
     const paymentCompleted = async (id) => {
         try {

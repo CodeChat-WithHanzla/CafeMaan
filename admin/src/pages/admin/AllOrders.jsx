@@ -34,11 +34,10 @@ function AllOrders() {
                 {orders?.length > 0 ? (
                     orders.map((order, index) => (
                         <div
-                            onClick={() => navigate(`/admin-orders/${order._id}`)}
                             key={order._id}
-                            className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white"
+                            className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white flex items-center justify-between"
                         >
-                            <div className="hidden md:grid md:grid-cols-[1fr_2fr_2fr_1fr_1fr_1fr_2fr] items-center">
+                            <div className="hidden md:grid md:grid-cols-[1fr_2fr_2fr_1fr_1fr_1fr_2fr] items-center flex-grow">
                                 <p>{index + 1}</p>
                                 <p>{order.userId.name} ({order.userId.phoneNumber})</p>
                                 <p className="truncate">{order.DealHeading}</p>
@@ -72,40 +71,13 @@ function AllOrders() {
                                     )}
                                 </div>
                             </div>
-                            <div className="md:hidden flex flex-col gap-2">
-                                <p className="text-gray-400">Order #{index + 1}</p>
-                                <p><span className="font-semibold">User:</span> {order.userId.name} ({order.userId.phoneNumber})</p>
-                                <p><span className="font-semibold">Deal:</span> {order.DealHeading}</p>
-                                <p><span className="font-semibold">Price:</span> Rs.{order.Price}</p>
-                                <p><span className="font-semibold">Payment:</span> {order.isPaymentCompleted ? "Paid ✅" : "Pending ❌"}</p>
-                                <p><span className="font-semibold">Status:</span> {order.status}</p>
-                                <div className="flex flex-wrap gap-2 mt-2">
-                                    {!["completed", "cancelled", "paid"].includes(order.status.toLowerCase()) && (
-                                        <>
-                                            <button
-                                                className="text-red-400 hover:text-red-600 text-sm border border-red-400 px-3 py-1 rounded w-full"
-                                                onClick={() => updateOrderStatus("cancel", order._id)}
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button
-                                                className="text-green-400 hover:text-green-600 text-sm border border-green-400 px-3 py-1 rounded w-full"
-                                                onClick={() => updateOrderStatus("complete", order._id)}
-                                            >
-                                                Complete
-                                            </button>
-                                        </>
-                                    )}
-                                    {!order.isPaymentCompleted && order.status !== "cancelled" && (
-                                        <button
-                                            className="text-yellow-400 hover:text-yellow-600 text-lg border border-yellow-400 px-3 py-1 rounded w-full"
-                                            onClick={() => paymentCompleted(order._id)}
-                                        >
-                                            Pay 💰
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
+                            {/* Open Order Icon */}
+                            <button
+                                className="text-blue-400 hover:text-blue-600 text-lg ml-4"
+                                onClick={() => navigate(`/admin-orders/${order._id}`)}
+                            >
+                                🔍
+                            </button>
                         </div>
                     ))
                 ) : (
