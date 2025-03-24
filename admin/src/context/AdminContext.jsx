@@ -161,6 +161,9 @@ const AdminContextProvider = ({ children }) => {
                 toast.error(`Error: ${error.message}`);
             }
         }
+        finally {
+            getAllOrders()
+        }
     }
     const value = {
         aToken, setAToken, BackendUrl, getAllMenus, menus, addMenu, updateMenu, deleteMenu, getMenuById
