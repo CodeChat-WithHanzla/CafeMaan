@@ -111,7 +111,7 @@ function Header() {
 
                         {/* Admin Tab */}
                         <li className="relative group">
-                            <Link to="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                            <Link to={import.meta.env.VITE_ADMIN_URL || ''} onClick={() => setIsMenuOpen(false)}>
                                 <div
                                     className={`cursor-pointer text-lg md:text-xl font-bold hover:text-yellow-400 transition duration-300 mb-1`}
                                 >
