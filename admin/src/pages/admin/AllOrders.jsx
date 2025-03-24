@@ -21,7 +21,8 @@ function AllOrders() {
                 All Orders
             </p>
 
-            <div className="bg-[#1E1E1E] border border-[#FCB116] rounded-lg text-sm max-h-[80vh] overflow-y-auto overflow-x-auto">
+            <div className="bg-[#1E1E1E] border border-[#FCB116] rounded-lg text-sm max-h-[80vh] overflow-y-auto">
+                {/* Table header (hidden on mobile) */}
                 <div className="hidden md:grid md:grid-cols-[1fr_2fr_2fr_1fr_1fr_1fr_2fr] py-3 px-6 border-b border-[#FCB116] bg-[#232323] text-white">
                     <p>#</p>
                     <p>User</p>
@@ -31,12 +32,14 @@ function AllOrders() {
                     <p>Status</p>
                     <p>Actions</p>
                 </div>
+
                 {orders?.length > 0 ? (
                     orders.map((order, index) => (
                         <div
                             key={order._id}
-                            className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white flex items-center justify-between"
+                            className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white flex flex-col md:flex-row md:items-center md:justify-between"
                         >
+                            {/* Desktop view */}
                             <div className="hidden md:grid md:grid-cols-[1fr_2fr_2fr_1fr_1fr_1fr_2fr] items-center flex-grow">
                                 <p>{index + 1}</p>
                                 <p>{order.userId.name} ({order.userId.phoneNumber})</p>
@@ -71,9 +74,46 @@ function AllOrders() {
                                     )}
                                 </div>
                             </div>
-                            {/* Open Order Icon */}
+
+                            {/* Mobile view (Stacked) */}
+                            <div className="md:hidden flex flex-col gap-2">
+                                <p><span className="font-semibold">User:</span> {order.userId.name} ({order.userId.phoneNumber})</p>
+                                <p><span className="font-semibold">Deal:</span> {order.DealHeading}</p>
+                                <p><span className="font-semibold">Price:</span> Rs.{order.Price}</p>
+                                <p><span className="font-semibold">Payment:</span> {order.isPaymentCompleted ? "Paid ✅" : "Pending ❌"}</p>
+                                <p><span className="font-semibold">Status:</span> {order.status}</p>
+
+                                <div className="flex flex-wrap gap-2">
+                                    {!["completed", "cancelled", "paid"].includes(order.status.toLowerCase()) && (
+                                        <>
+                                            <button
+                                                className="text-red-400 hover:text-red-600 text-sm border border-red-400 px-2 py-1 rounded"
+                                                onClick={() => updateOrderStatus("cancel", order._id)}
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button
+                                                className="text-green-400 hover:text-green-600 text-sm border border-green-400 px-2 py-1 rounded"
+                                                onClick={() => updateOrderStatus("complete", order._id)}
+                                            >
+                                                Complete
+                                            </button>
+                                        </>
+                                    )}
+                                    {!order.isPaymentCompleted && order.status !== "cancelled" && (
+                                        <button
+                                            className="text-yellow-400 hover:text-yellow-600 text-lg border border-yellow-400 px-3 py-1 rounded"
+                                            onClick={() => paymentCompleted(order._id)}
+                                        >
+                                            💰
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Open Order Button */}
                             <button
-                                className="text-blue-400 hover:text-blue-600 text-lg ml-4"
+                                className="text-blue-400 hover:text-blue-600 text-lg mt-2 md:ml-4"
                                 onClick={() => navigate(`/admin-orders/${order._id}`)}
                             >
                                 🔍
