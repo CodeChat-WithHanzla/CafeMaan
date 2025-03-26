@@ -23,7 +23,7 @@ function AllMenus() {
         <div className="w-full max-w-6xl mx-auto p-4 bg-[#121212] text-[#FCB116] mt-5">
             <p className="mb-3 text-lg font-semibold text-center sm:text-left">All Menus</p>
             <div className="bg-[#1E1E1E] border border-[#FCB116] rounded-lg text-sm max-h-[80vh] overflow-y-auto">
-                {/* Header */}
+                
                 <div className="hidden sm:grid grid-cols-[0.5fr_3fr_3fr_1fr_1fr_1fr_2fr] py-3 px-6 border-b border-[#FCB116] bg-[#232323] text-white">
                     <p>#</p>
                     <p>Deal Heading</p>
@@ -34,11 +34,11 @@ function AllMenus() {
                     <p>Actions</p>
                 </div>
 
-                {/* Data */}
+                
                 {menus.length > 0 ? (
                     menus.map((menu, index) => (
                         <div key={menu._id} className="p-4 border-b border-[#FCB116] hover:bg-[#333] text-white">
-                            {/* Grid for Large Screens */}
+                            
                             <div className="hidden sm:grid sm:grid-cols-[0.5fr_3fr_3fr_1fr_1fr_1fr_2fr] items-center">
                                 <p>{index + 1}</p>
                                 <p>{menu.DealHeading}</p>
@@ -51,7 +51,7 @@ function AllMenus() {
                                         className="text-blue-400 hover:text-blue-600 text-lg"
                                         onClick={() => navigate(`/update-menu/${menu._id}`)}
                                     >
-                                        <i className="ri-edit-2-line"></i>
+                                        <i className="ri-edit-2-line text-yellow-400"></i>
                                     </button>
                                     <button
                                         className="text-red-400 hover:text-red-600 text-lg"
@@ -62,7 +62,6 @@ function AllMenus() {
                                 </div>
                             </div>
 
-                            {/* Stacked Layout for Small Screens */}
                             <div className="sm:hidden flex flex-col gap-2">
                                 <p className="font-semibold">{menu.DealHeading}</p>
                                 <p className="text-gray-300">{menu.DealText}</p>

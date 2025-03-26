@@ -146,21 +146,23 @@ function UpdateMenu() {
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`bg-[#FCB116] text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b] flex items-center justify-center gap-2 transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
-                >
-                    {loading ? (
-                        <>
-                            <div className="animate-spin border-t-2 border-b-2 border-black rounded-full w-5 h-5"></div>
-                            Updating...
-                        </>
-                    ) : (
-                        "Update Menu"
-                    )}
-                </button>
+                <div className="w-full flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`bg-[#FCB116] md:w-80 md:text-lg text-black text-sm px-10 py-3 rounded-full mt-4 hover:bg-[#d99e0b] flex items-center justify-center gap-2 transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""
+                            }`}
+                    >
+                        {loading ? (
+                            <>
+                                <div className="animate-spin border-t-2 border-b-2 border-black rounded-full w-5 h-5"></div>
+                                Updating...
+                            </>
+                        ) : (
+                            "Update Menu"
+                        )}
+                    </button>
+                </div>
             </div>
         </form>
     );
