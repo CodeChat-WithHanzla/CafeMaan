@@ -47,7 +47,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex min-h-screen w-screen">
+        <div className="flex h-screen w-screen">
             <ToastContainer />
             <img className="object-cover w-full md:w-1/2 hidden md:block" src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735564600/signin_pic.13b93085_lf3gjk.webp" alt="Sign In" />
 

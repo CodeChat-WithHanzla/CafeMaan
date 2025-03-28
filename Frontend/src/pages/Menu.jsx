@@ -29,7 +29,7 @@ function Menu() {
 
             <div className="bg-[#121212] flex-grow  w-screen mt-[300px]">
                 {menuBar.map((item, index) => (
-                    <div key={index} id={item.replace(/\s/g, "")} className="min-h-[80vh] p-6">
+                    <div key={index} id={item.replace(/\s/g, "")} className="min-h-[80vh]">
                         <MenuItems item={item} setShowCart={setShowCart} />
                     </div>
                 ))}

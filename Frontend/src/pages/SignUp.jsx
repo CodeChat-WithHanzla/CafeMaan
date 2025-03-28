@@ -59,11 +59,11 @@ const SignUp = () => {
         finally {
             setLoading(false)
         }
-        // setName('')
-        // setEmail('')
-        // setPhoneNumber('')
-        // setPassword('')
-        // setConfirmPassword('')
+        setName('')
+        setEmail('')
+        setPhoneNumber('')
+        setPassword('')
+        setConfirmPassword('')
     };
 
     return (

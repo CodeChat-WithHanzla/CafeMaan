@@ -24,8 +24,8 @@ function MenuItems({ item, setShowCart }) {
     const menuItemsDesc = Array.isArray(deals) ? deals.filter(deal => deal.Category === item) : [];
 
     return (
-        <div className="w-screen text-white pt-3">
-            <div className="ml-10 font-bold text-3xl mb-5">{item}</div>
+        <div className="w-screen text-white pt-3 pb-10 px-14">
+            <div className="font-bold text-3xl mb-5">{item}</div>
             <div className="flex justify-center items-center flex-wrap gap-5 mb-20">
                 {menuItemsDesc.length > 0 && menuItemsDesc.map((deal) => (
                     <MenuCard
