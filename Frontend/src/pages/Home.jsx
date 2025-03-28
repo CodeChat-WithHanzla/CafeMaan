@@ -34,7 +34,7 @@ function Home() {
                     </div>
                 ))}
 
-                <div className="flex justify-center p-6">
+                <div className="flex justify-center p-6 ">
                     <button
                         onClick={() => navigate('/menu')}
                         className="bg-yellow-400 text-[#171717] py-2 px-4 rounded font-semibold hover:bg-yellow-500 transition duration-300"

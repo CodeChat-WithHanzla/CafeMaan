@@ -153,7 +153,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
         <>
             <ToastContainer />
             <div
-                className="bg-[#171717] p-10 text-white w-full space-y-8 relative max-h-[600px] overflow-y-scroll scrollbar-thin scrollbar-thumb-scrollbarYellow scrollbar-track-transparent scrollbar-thumb-rounded-scroll-thumb pr-5"
+                className="bg-[#171717] p-10 text-white w-full space-y-8 relative max-h-[600px] overflow-y-scroll scrollbar-thin scrollbar-thumb-scrollbarYellow scrollbar-track-transparent scrollbar-thumb-rounded-scroll-thumb pr-5 mt-32"
                 style={{
                     position: isVisible ? 'absolute' : 'fixed',
                     top: position ? position.top : 'auto',
@@ -222,7 +222,7 @@ function AddToCart({ setShowCart, DealHeading, DealText, Price, imageUrl, rating
                         <AddToCartButton handleCLick={submitHandler} />
                     </div>
                 </div>
-{/* 
+                {/* 
                 <div className="space-y-4">
                     <h3 className="text-2xl font-bold">
                         Add-ons <span className="text-sm font-medium text-gray-400">(Optional)</span>
