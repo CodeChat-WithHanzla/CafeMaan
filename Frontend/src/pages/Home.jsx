@@ -3,13 +3,13 @@ import { Carousel, MenuHeader, MenuItems, AddToCart, ExploreMenu } from '../comp
 import { useSelector, useDispatch } from 'react-redux';
 import { clearSelectedItem } from '../slice/SelectedSlice';
 import { menuBar } from '../assets/cafemaan';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
     const selectedItem = useSelector((state) => state.selectedItem);
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(true);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!showCart) {
@@ -17,12 +17,12 @@ function Home() {
         }
     }, [showCart, dispatch]);
 
-    // Limit the number of menu items displayed on the home page
-    const displayedMenuItems = menuBar.slice(0, 3); // Show only the first 3 menu items
+
+    const displayedMenuItems = menuBar.slice(0, 3);
 
     return (
         <div className="bg-[#121212] min-h-screen flex flex-col w-screen overflow-hidden">
-            <div className="bg-[#171717] flex-grow">
+            <div className="bg-[#171717] flex-grow mt-32 w-screen">
                 <Carousel />
                 <MenuHeader menuBar={displayedMenuItems} />
             </div>
@@ -33,10 +33,10 @@ function Home() {
                         <MenuItems item={item} setShowCart={setShowCart} />
                     </div>
                 ))}
-                {/* Add a "More" button to navigate to the full menu page */}
+
                 <div className="flex justify-center p-6">
                     <button
-                        onClick={() => navigate('/menu')} // Navigate to the full menu page
+                        onClick={() => navigate('/menu')}
                         className="bg-yellow-400 text-[#171717] py-2 px-4 rounded font-semibold hover:bg-yellow-500 transition duration-300"
                     >
                         More

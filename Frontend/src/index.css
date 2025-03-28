@@ -8,9 +8,16 @@
   font-family: Outfit;
 }
 
+body,
+html {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
 ul::-webkit-scrollbar {
   display: none;
 }
+
 ul {
   -ms-overflow-style: none;
   scrollbar-width: none;
