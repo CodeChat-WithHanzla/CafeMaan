@@ -64,7 +64,7 @@ function Header() {
                 <AddToCardSlider isOpen={isCartOpen} toggleSlider={toggleCartSlider} />
                 <Link to='/'>
                     <img
-                        className="mx-auto mb-4 w-32 h-32 object-contain transition-all duration-300 hover:scale-105"
+                        className="mx-auto mb-4 w-20 h-20 object-contain transition-all duration-300 hover:scale-105"
                         src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
                         alt="CafeMaan"
                     />
