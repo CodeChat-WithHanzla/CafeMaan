@@ -5,7 +5,7 @@ import AddToCardSlider from "../components/AddToCardSlider";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../slice/UserSlice";
 import { setIsLoggedIn, setUserData } from '../slice/UserSlice';
-import { Link } from 'react-router-dom';
+
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
