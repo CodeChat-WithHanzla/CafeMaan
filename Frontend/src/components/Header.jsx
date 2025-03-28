@@ -5,7 +5,7 @@ import AddToCardSlider from "../components/AddToCardSlider";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../slice/UserSlice";
 import { setIsLoggedIn, setUserData } from '../slice/UserSlice';
-
+import { Link } from 'react-router-dom';
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -62,11 +62,13 @@ function Header() {
         >
             <div className="flex justify-between items-center px-6 py-4 md:px-8">
                 <AddToCardSlider isOpen={isCartOpen} toggleSlider={toggleCartSlider} />
-                <img
-                    className="w-14 md:w-16 transition-all duration-300 hover:scale-105"
-                    src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
-                    alt="CafeMaan"
-                />
+                <Link to='/'>
+                    <img
+                        className="mx-auto mb-4 w-32 h-32 object-contain transition-all duration-300 hover:scale-105"
+                        src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
+                        alt="CafeMaan"
+                    />
+                </Link>
                 <button
                     className="md:hidden text-3xl focus:outline-none"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}

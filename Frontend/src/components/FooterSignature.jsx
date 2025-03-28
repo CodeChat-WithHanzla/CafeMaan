@@ -1,14 +1,17 @@
 import React from 'react';
 import 'remixicon/fonts/remixicon.css';
 import { Footer } from "../assets/cafemaan/index.js"
+import { Link } from 'react-router-dom';
 function FooterSignature() {
     return (
         <div className='text-white flex items-center justify-center flex-col'>
-            <img
-                className="mx-auto mb-4 w-32 h-32 object-contain transition-all duration-300 hover:scale-105"
-                src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
-                alt="Logo"
-            />
+            <Link to='/'>
+                <img
+                    className="mx-auto mb-4 w-32 h-32 object-contain transition-all duration-300 hover:scale-105"
+                    src="https://res.cloudinary.com/dwlbprnr5/image/upload/v1735671465/Asset_4_ucj8qd.png"
+                    alt="CafeMaan"
+                />
+            </Link>
             <div className="w-full h-[2px] bg-[#FCB116] mb-4"></div>
 
             <div className="flex flex-col items-center">
